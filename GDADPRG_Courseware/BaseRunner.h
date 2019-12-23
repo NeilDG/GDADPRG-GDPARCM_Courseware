@@ -18,7 +18,7 @@ namespace HO2 {
 		sf::RenderWindow		window;
 		vector <Entity> entityList;
 
-		Entity changeableEntity;
+		Entity* changeableEntity;
 
 		void render();
 		void processEvents();

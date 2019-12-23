@@ -16,6 +16,6 @@ class Entity
 		sf::Texture *texture;
 		sf::Sprite *sprite;
 
-		int *counter;
+		int counter;
 };
 

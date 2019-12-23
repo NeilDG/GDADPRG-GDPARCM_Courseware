@@ -67,21 +67,24 @@ void HO2::BaseRunner::processEvents()
 	sf::Mouse mouse;
 	sf::Vector2f mousePos(mouse.getPosition(this->window).x, mouse.getPosition(this->window).y);
 
+	this->changeableEntity = NULL;
+
 	for (int i = 0; i < this->entityList.size(); i++) {
 		Entity entity = this->entityList[i];
 		float dist = VectorUtils::getDistance(mousePos, entity.getSprite()->getPosition());
 		float bounds = entity.getSprite()->getGlobalBounds().width;
 		if (dist < bounds) {
-			this->changeableEntity = this->entityList[i];
+			this->changeableEntity = &this->entityList[i];
+			break;
 		}
 	}
 }
 
 void HO2::BaseRunner::update(sf::Time elapsedTime) {
 	this->ticks += elapsedTime;
-	if (this->ticks.asSeconds() > 0.1167f) { //computed by 7 frames divided by 60.0
+	if (this->ticks.asSeconds() > 0.1167f && this->changeableEntity != NULL) { //computed by 7 frames divided by 60.0
 		this->ticks = sf::Time::Zero;
-		this->changeableEntity.incrementTexture();
+		this->changeableEntity->incrementTexture();
 	}
 }
 
