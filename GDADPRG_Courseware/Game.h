@@ -20,12 +20,8 @@ namespace Introduction {
 		void					handleInputWithKB(sf::Keyboard::Key key, bool isPressed);
 
 		void handleInputWithMouse(bool mousePressed, int x, int y);
-
 		void moveSpriteByMouse(sf::Time elapsedTime);
-
 		float getDistance(sf::Vector2f v1, sf::Vector2f v2);
-
-		sf::Vector2f getCenter();
 
 
 	private:

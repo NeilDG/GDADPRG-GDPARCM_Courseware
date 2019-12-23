@@ -31,6 +31,9 @@ Introduction::Game::Game()
 	planeSprite.setTexture(mTexture);
 	planeSprite.setPosition(100.f, 100.f);
 
+	sf::Vector2u size = this->mTexture.getSize();
+	this->planeSprite.setOrigin(size.x / 2, size.y / 2);
+
 	mFont.loadFromFile("Media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
 	mStatisticsText.setPosition(5.f, 5.f);
@@ -130,16 +133,33 @@ void Introduction::Game::updateStatistics(sf::Time elapsedTime)
 
 void Introduction::Game::handleInputWithKB(sf::Keyboard::Key key, bool isPressed)
 {
+	if (this->shouldMouseMove) {
+		return;
+	}
+
 	if (key == sf::Keyboard::W)
-		movingUp = isPressed;
+		this->movingUp = isPressed;
 	else if (key == sf::Keyboard::S)
-		movingDown = isPressed;
+		this->movingDown = isPressed;
 	else if (key == sf::Keyboard::A)
-		movingLeft = isPressed;
+		this->movingLeft = isPressed;
 	else if (key == sf::Keyboard::D)
-		movingRight = isPressed;
+		this->movingRight = isPressed;
 	else if (key == sf::Keyboard::Escape)
 		mWindow.close();
+
+	if (movingUp) {
+		this->planeSprite.setRotation(0.0f);
+	}
+	else if (movingDown) {
+		this->planeSprite.setRotation(180.0f);
+	}
+	else if (movingRight) {
+		this->planeSprite.setRotation(90.0f);
+	}
+	else if (movingLeft) {
+		this->planeSprite.setRotation(-90.0f);
+	}
 }
 
 void Introduction::Game::handleInputWithMouse(bool mousePressed, int x, int y) {
@@ -148,7 +168,11 @@ void Introduction::Game::handleInputWithMouse(bool mousePressed, int x, int y) {
 		this->mouseDown = true;
 		this->shouldMouseMove = true;
 		this->mouseTarget = sf::Vector2f(x, y);
-		this->destination = sf::Vector2f(x - this->getCenter().x, y - this->getCenter().y);
+		this->destination = sf::Vector2f(x - this->planeSprite.getPosition().x, y - this->planeSprite.getPosition().y);
+
+		//set mouse angle
+		float angle = -atan2(this->planeSprite.getPosition().x - x, this->planeSprite.getPosition().y - y) * 180 / 3.14159; //angle in degrees of rotation for sprite
+		this->planeSprite.setRotation(angle);
 	}
 	else if (!mousePressed && this->mouseDown) {
 		std::cout << "Left button released. \n";
@@ -159,9 +183,9 @@ void Introduction::Game::handleInputWithMouse(bool mousePressed, int x, int y) {
 void Introduction::Game::moveSpriteByMouse(sf::Time elapsedTime) {
 	if (this->shouldMouseMove) {
 		this->planeSprite.move(this->destination * elapsedTime.asSeconds());
-		float dist = this->getDistance(this->getCenter(), this->mouseTarget);
+		float dist = this->getDistance(this->planeSprite.getPosition(), this->mouseTarget);
 
-		std::cout << dist * TimePerFrame.asMilliseconds() << "\n";
+		//std::cout << dist * TimePerFrame.asMilliseconds() << "\n";
 		if (dist * TimePerFrame.asMilliseconds() < 60.0f) {
 			this->shouldMouseMove = false;
 		}
@@ -172,10 +196,3 @@ float Introduction::Game::getDistance(sf::Vector2f v1, sf::Vector2f v2) {
 	return sqrtf(powf(v1.x - v2.x, 2) + powf(v1.y - v2.y, 2));
 }
 
-sf::Vector2f Introduction::Game::getCenter() {
-	sf::Vector2f center(
-		this->planeSprite.getPosition().x + (this->mTexture.getSize().x / 2),
-		this->planeSprite.getPosition().y + (this->mTexture.getSize().y / 2));
-
-	return center;
-}
