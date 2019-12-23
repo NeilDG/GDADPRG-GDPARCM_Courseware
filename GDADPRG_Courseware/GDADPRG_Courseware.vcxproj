@@ -24,12 +24,14 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="VectorUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="VectorUtils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

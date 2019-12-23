@@ -13,8 +13,13 @@ namespace HO2 {
 
 	private:
 		static const sf::Time	TimePerFrame;
+		sf::Time ticks;
+
 		sf::RenderWindow		window;
 		vector <Entity> entityList;
+
+		Entity changeableEntity;
+
 		void render();
 		void processEvents();
 		void update(sf::Time elapsedTime);

@@ -10,6 +10,7 @@ class TextureManager
 		static TextureManager* getInstance();
 		void loadAll();
 		sf::Texture* getTextureAt(TextureManager::AssetType assetType, int index);
+		int getTextureLength(TextureManager::AssetType assetType);
 		void testFunction();
 
 	private:

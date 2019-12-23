@@ -19,6 +19,9 @@
     <Filter Include="Source Files\asset management">
       <UniqueIdentifier>{258cfd0e-4712-4381-b85e-67a184e97d45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\vector_utils">
+      <UniqueIdentifier>{a3f9a433-3604-4ff5-821d-dc889ee39ba7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +39,9 @@
     <ClCompile Include="TextureManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="VectorUtils.cpp">
+      <Filter>Source Files\vector_utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -48,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextureManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VectorUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
