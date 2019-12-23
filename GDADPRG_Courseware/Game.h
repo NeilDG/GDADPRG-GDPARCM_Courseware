@@ -1,6 +1,3 @@
-#ifndef BOOK_GAME_HPP
-#define BOOK_GAME_HPP
-
 #include <SFML/Graphics.hpp>
 
 namespace Introduction {
@@ -46,5 +43,4 @@ namespace Introduction {
 		sf::Vector2f destination;
 	};
 
-#endif // BOOK_GAME_HPP
 }

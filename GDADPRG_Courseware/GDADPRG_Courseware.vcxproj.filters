@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\introduction">
+    <Filter Include="Source Files\io handling">
       <UniqueIdentifier>{c0404eac-d746-44cd-8e4c-6b6bd62b014d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\introduction">
-      <UniqueIdentifier>{87057fdf-dde9-4ce2-8638-937b29c64687}</UniqueIdentifier>
+    <Filter Include="Source Files\asset management">
+      <UniqueIdentifier>{258cfd0e-4712-4381-b85e-67a184e97d45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -25,12 +25,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files\introduction</Filter>
+      <Filter>Source Files\io handling</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseRunner.cpp">
+      <Filter>Source Files\asset management</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\asset management</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
-      <Filter>Header Files\introduction</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseRunner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
