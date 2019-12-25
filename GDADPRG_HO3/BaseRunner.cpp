@@ -38,6 +38,15 @@ void BaseRunner::update(sf::Time elapsedTime) {
 void BaseRunner::render() {
 	this->window.clear();
 
+	sf::Texture texture;
+	texture.loadFromFile("Media/Textures/Desert.png");
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
+	texture.setRepeated(true);
+	sf::IntRect rect;
+	rect.width = 1024; rect.height = 768;
+	sprite.setTextureRect(rect);
+	this->window.draw(sprite);
 
 	this->window.display();
 }
