@@ -16,8 +16,8 @@ namespace HO2 {
 		sf::Time ticks;
 
 		sf::RenderWindow		window;
-		vector <Entity> entityList;
 
+		vector <Entity*> entityList;
 		Entity* changeableEntity;
 
 		void render();

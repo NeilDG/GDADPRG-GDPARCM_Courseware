@@ -2,8 +2,8 @@
 #include <iostream>
 #include "TextureManager.h"
 
+//a singleton class
 TextureManager* TextureManager::sharedInstance = NULL;
-
 
 TextureManager* TextureManager::getInstance() {
 	if (sharedInstance == NULL) {

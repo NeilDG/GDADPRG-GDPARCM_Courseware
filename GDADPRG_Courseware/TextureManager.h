@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include "SFML/Graphics.hpp"
 using namespace std;
-//a singleton class
+
 class TextureManager
 {
 	public:
@@ -22,4 +22,6 @@ class TextureManager
 		unordered_map<TextureManager::AssetType, vector<sf::Texture*>> textureMap;
 
 };
+
+
 

@@ -22,6 +22,9 @@
     <Filter Include="Source Files\vector_utils">
       <UniqueIdentifier>{a3f9a433-3604-4ff5-821d-dc889ee39ba7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\entity component">
+      <UniqueIdentifier>{c7c5164d-70ae-403d-bbbd-6dd8c57bc140}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
