@@ -10,7 +10,7 @@ public:
 
 
 private:
-	static const sf::Time	TimePerFrame;
+	static const sf::Time	TIME_PER_FRAME;
 	sf::Time ticks;
 
 	sf::RenderWindow		window;

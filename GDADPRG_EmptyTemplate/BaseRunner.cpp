@@ -1,6 +1,6 @@
 #include "BaseRunner.h"
 
-const sf::Time BaseRunner::TimePerFrame = sf::seconds(1.f / 60.f);
+const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
 BaseRunner::BaseRunner() :
 	window(sf::VideoMode(1024, 768), "HO: Empty Template", sf::Style::Close) {
@@ -14,12 +14,12 @@ void BaseRunner::run() {
 	{
 		sf::Time elapsedTime = clock.restart();
 		timeSinceLastUpdate += elapsedTime;
-		while (timeSinceLastUpdate > TimePerFrame)
+		while (timeSinceLastUpdate > TIME_PER_FRAME)
 		{
-			timeSinceLastUpdate -= TimePerFrame;
+			timeSinceLastUpdate -= TIME_PER_FRAME;
 
 			processEvents();
-			update(TimePerFrame);
+			update(TIME_PER_FRAME);
 		}
 
 		render();
