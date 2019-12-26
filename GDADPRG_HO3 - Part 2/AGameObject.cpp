@@ -42,9 +42,30 @@ void AGameObject::setPosition(float x, float y)
 	}
 }
 
+AGameObject::List AGameObject::getChildren() {
+	return this->childList;
+}
+
+void AGameObject::updateChildren(List objectList, sf::Time deltaTime) {
+	for (int i = 0; i < objectList.size(); i++) {
+		objectList[i]->update(deltaTime);
+		this->updateChildren(objectList[i]->getChildren(), deltaTime);
+	}
+}
+
 void AGameObject::draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates) {
 	//apply drawing with parent-child relationship
-	if (this->sprite != NULL && this->childList.size() > 0) {
+	targetWindow->draw(*this->sprite, renderStates); //draw the object first
+	renderStates.transform = this->sprite->getTransform() * renderStates.transform; //apply the transform to its children
+	//std::cout << "Drawing " + this->getName() + "\n";
+
+	//draw its children
+	for (int i = 0; i < this->childList.size(); i++) {
+		AGameObject* child = this->childList[i];
+		child->draw(targetWindow, renderStates);
+	}
+
+	/*if (this->sprite != NULL && this->childList.size() > 0) {
 		targetWindow->draw(*this->sprite, renderStates); //draw the object first
 		renderStates.transform = this->sprite->getTransform() * renderStates.transform; //apply the transform to its children
 		std::cout << "Drawing " + this->getName() + "\n";
@@ -59,5 +80,5 @@ void AGameObject::draw(sf::RenderWindow* targetWindow, sf::RenderStates renderSt
 	else if (this->sprite != NULL) {
 		targetWindow->draw(*this->sprite, renderStates);
 		std::cout << "Drawing " + this->getName() + "\n";
-	}
+	}*/
 }

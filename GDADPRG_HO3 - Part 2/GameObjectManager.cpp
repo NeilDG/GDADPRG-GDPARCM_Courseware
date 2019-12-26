@@ -45,6 +45,7 @@ void GameObjectManager::update(sf::Time deltaTime)
 	//std::cout << "Delta time: " << deltaTime.asSeconds() << "\n";
 	for (int i = 0; i < this->gameObjectList.size(); i++) {
 		this->gameObjectList[i]->update(deltaTime);
+		this->gameObjectList[i]->updateChildren(this->gameObjectList[i]->getChildren(), deltaTime);
 	}
 }
 

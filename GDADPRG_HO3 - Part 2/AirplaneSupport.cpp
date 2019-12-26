@@ -1,5 +1,6 @@
 #include "AirplaneSupport.h"
 #include "TextureManager.h"
+#include <iostream>
 
 AirplaneSupport::AirplaneSupport(string name):AGameObject(name)
 {
@@ -21,6 +22,25 @@ void AirplaneSupport::processInput(sf::Event event)
 
 void AirplaneSupport::update(sf::Time deltaTime)
 {
-	//do not do anything since airplane support is parented to airplane player.
-	//it will follow its transform
+	sf::Vector2f offset(0.0f, 0.0f);
+	this->ticks += deltaTime.asSeconds();
+	if (this->moveRight) {
+		offset.x += this->SPEED_MULTIPLIER;
+		this->sprite->move(offset * deltaTime.asSeconds());
+	}
+	else if (this->moveLeft) {
+		offset.x -= this->SPEED_MULTIPLIER;
+		this->sprite->move(offset * deltaTime.asSeconds());
+	}
+
+	if (this->ticks > 2.0f && this->moveRight) {
+		this->moveRight = false;
+		this->moveLeft = true;
+		this->ticks = 0.0f;
+	}
+	else if (this->ticks > 2.0f && this->moveLeft) {
+		this->moveLeft = false;
+		this->moveRight = true;
+		this->ticks = 0.0f;
+	}
 }
