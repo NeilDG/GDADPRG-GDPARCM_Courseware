@@ -10,6 +10,11 @@ AirplanePlayer::AirplanePlayer(string name) : AGameObject(name) {
 
 }
 
+AirplanePlayer::~AirplanePlayer()
+{
+	AGameObject::~AGameObject();
+}
+
 void AirplanePlayer::initialize() {
 	std::cout << "Declared as " << this->getName() << "\n";
 

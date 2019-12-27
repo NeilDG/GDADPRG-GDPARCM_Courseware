@@ -28,6 +28,10 @@ void TextureManager::loadAll() {
 	texture->loadFromFile("Media/Textures/Raptor.png");
 	texture->setRepeated(true);
 	this->textureMap[Raptor].push_back(texture);
+
+	texture = new sf::Texture();
+	texture->loadFromFile("Media/Textures/spike.png");
+	this->textureMap[Spike].push_back(texture);
 }
 
 sf::Texture* TextureManager::getTextureAt(TextureManager::AssetType assetType, int index) {

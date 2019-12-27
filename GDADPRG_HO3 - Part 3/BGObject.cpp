@@ -8,6 +8,11 @@ BGObject::BGObject(string name) : AGameObject(name)
 {
 }
 
+BGObject::~BGObject()
+{
+	AGameObject::~AGameObject();
+}
+
 void BGObject::initialize()
 {
 	std::cout << "Declared as " << this->getName() << "\n";

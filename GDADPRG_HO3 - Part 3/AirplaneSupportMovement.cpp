@@ -1,29 +1,29 @@
 #include "AirplaneSupportMovement.h"
+#include "AGameObject.h"
 #include <iostream>
 
 AirplaneSupportMovement::AirplaneSupportMovement(string name): AComponent(name, Script)
 {
-	this->sprite = NULL;
 }
 
 AirplaneSupportMovement::~AirplaneSupportMovement()
 {
 	AComponent::~AComponent();
-	delete this->sprite;
 }
 
 void AirplaneSupportMovement::perform()
 {
-
+	sf::Sprite* sprite = this->getOwner()->getSprite();
 	sf::Vector2f offset(0.0f, 0.0f);
+
 	this->ticks += this->deltaTime.asSeconds();
 	if (this->moveRight) {
 		offset.x += this->SPEED_MULTIPLIER;
-		this->sprite->move(offset * deltaTime.asSeconds());
+		sprite->move(offset * deltaTime.asSeconds());
 	}
 	else if (this->moveLeft) {
 		offset.x -= this->SPEED_MULTIPLIER;
-		this->sprite->move(offset * deltaTime.asSeconds());
+		sprite->move(offset * deltaTime.asSeconds());
 	}
 
 	if (this->ticks > 2.0f && this->moveRight) {
@@ -36,9 +36,4 @@ void AirplaneSupportMovement::perform()
 		this->moveRight = true;
 		this->ticks = 0.0f;
 	}
-}
-
-void AirplaneSupportMovement::assignSprite(sf::Sprite* sprite)
-{
-	this->sprite = sprite;
 }

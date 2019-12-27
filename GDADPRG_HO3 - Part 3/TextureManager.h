@@ -6,7 +6,7 @@ using namespace std;
 class TextureManager
 {
 public:
-	enum AssetType { BG = 0, Eagle = 1, Raptor = 2};
+	enum AssetType { BG = 0, Eagle = 1, Raptor = 2, Spike = 3};
 	static TextureManager* getInstance();
 	void loadAll();
 	sf::Texture* getTextureAt(TextureManager::AssetType assetType, int index);

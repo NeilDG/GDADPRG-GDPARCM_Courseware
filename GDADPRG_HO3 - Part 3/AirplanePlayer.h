@@ -8,6 +8,7 @@ class AirplanePlayer : public AGameObject
 {
 	public: 
 		AirplanePlayer(string name);
+		~AirplanePlayer();
 		void initialize();
 
 };

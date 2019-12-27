@@ -156,6 +156,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayerInputController.cpp" />
     <ClCompile Include="PlayerMovement.cpp" />
+    <ClCompile Include="RotateMovement.cpp" />
+    <ClCompile Include="SpikePowerup.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
@@ -172,6 +174,8 @@
     <ClInclude Include="GenericInputController.h" />
     <ClInclude Include="PlayerInputController.h" />
     <ClInclude Include="PlayerMovement.h" />
+    <ClInclude Include="RotateMovement.h" />
+    <ClInclude Include="SpikePowerup.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>

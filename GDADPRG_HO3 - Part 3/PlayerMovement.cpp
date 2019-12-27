@@ -26,22 +26,18 @@ void PlayerMovement::perform()
 	if (inputController->isUp()) {
 		offset.y -= this->SPEED_MULTIPLIER;
 		playerSprite->move(offset * deltaTime.asSeconds());
-		std::cout << "Up \n";
 	}
 	else if (inputController->isDown()) {
 		offset.y += this->SPEED_MULTIPLIER;
 		playerSprite->move(offset * deltaTime.asSeconds());
-		std::cout << "Down \n";
 	}
 
 	else if (inputController->isRight()) {
 		offset.x += this->SPEED_MULTIPLIER;
 		playerSprite->move(offset * deltaTime.asSeconds());
-		std::cout << "Right \n";
 	}
 	else if (inputController->isLeft()) {
 		offset.x -= this->SPEED_MULTIPLIER;
 		playerSprite->move(offset * deltaTime.asSeconds());
-		std::cout << "Left \n";
 	}
 }

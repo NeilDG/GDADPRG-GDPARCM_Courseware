@@ -1,6 +1,7 @@
 #include "AirplaneSupport.h"
 #include "TextureManager.h"
 #include "AirplaneSupportMovement.h"
+#include "RotateMovement.h"
 #include <iostream>
 
 AirplaneSupport::AirplaneSupport(string name):AGameObject(name)
@@ -18,6 +19,5 @@ void AirplaneSupport::initialize()
 
 	//assign logic component
 	AirplaneSupportMovement* logicComponent = new AirplaneSupportMovement("AirplaneSupportMovement_1");
-	logicComponent->assignSprite(this->sprite);
 	this->attachComponent(logicComponent);
 }
