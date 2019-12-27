@@ -42,11 +42,11 @@ void AGameObject::setPosition(float x, float y)
 	}
 }
 
-AGameObject::List AGameObject::getChildren() {
+AGameObject::ObjectList AGameObject::getChildren() {
 	return this->childList;
 }
 
-void AGameObject::updateChildren(List objectList, sf::Time deltaTime) {
+void AGameObject::updateChildren(ObjectList objectList, sf::Time deltaTime) {
 	for (int i = 0; i < objectList.size(); i++) {
 		objectList[i]->update(deltaTime);
 		this->updateChildren(objectList[i]->getChildren(), deltaTime);

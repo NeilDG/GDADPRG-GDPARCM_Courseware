@@ -20,16 +20,16 @@ class AGameObject: sf::NonCopyable
 		void detachChild(AGameObject* child);
 		void setPosition(float x, float y);
 			
-		typedef vector<AGameObject*> List;
-		List getChildren();
-		void updateChildren(List objectList, sf::Time deltaTime);
+		typedef vector<AGameObject*> ObjectList;
+		ObjectList getChildren();
+		void updateChildren(ObjectList objectList, sf::Time deltaTime);
 
 	protected:
 		string name;
 		sf::Sprite* sprite;
 		sf::Texture* texture;
 
-		List childList; //allow parenting of game objects
+		ObjectList childList; //allow parenting of game objects
 
 
 };
