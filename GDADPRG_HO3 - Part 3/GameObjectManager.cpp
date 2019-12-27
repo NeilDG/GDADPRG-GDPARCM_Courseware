@@ -1,6 +1,7 @@
 #include <stddef.h>
 #include "GameObjectManager.h"
 #include <iostream>
+#include "GenericInputController.h"
 
 GameObjectManager* GameObjectManager::sharedInstance = NULL;
 
@@ -39,7 +40,9 @@ void GameObjectManager::processInput(sf::Event event) {
 		//replace with component update
 		AGameObject::ComponentList componentList = this->gameObjectList[i]->getComponentsOfType(AComponent::ComponentType::Input);
 		for (int j = 0; j < componentList.size(); j++) {
-			componentList[j]->perform();
+			GenericInputController* inputController = (GenericInputController*) componentList[j];
+			inputController->assignEvent(event);
+			inputController->perform();
 		}
 	}
 }

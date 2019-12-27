@@ -1,9 +1,9 @@
 #include "AComponent.h"
 
-AComponent::AComponent(string name) {
+AComponent::AComponent(string name, ComponentType type) {
 	this->name = name;
 	this->owner = NULL;
-	this->type = NotSet;
+	this->type = type;
 }
 
 AComponent::~AComponent(){

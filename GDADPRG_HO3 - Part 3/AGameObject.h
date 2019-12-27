@@ -16,6 +16,7 @@ class AGameObject: sf::NonCopyable
 		//virtual void update(sf::Time deltaTime) = 0;
 		void draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates);
 		string getName();
+		sf::Sprite* getSprite();
 		
 		void attachChild(AGameObject* child);
 		void detachChild(AGameObject* child);

@@ -149,9 +149,14 @@
     <ClCompile Include="AirplaneSupport.cpp" />
     <ClCompile Include="AirplaneSupportMovement.cpp" />
     <ClCompile Include="BaseRunner.cpp" />
+    <ClCompile Include="BGMovement.cpp" />
     <ClCompile Include="BGObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GenericInputController.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlayerInputController.cpp" />
+    <ClCompile Include="PlayerMovement.cpp" />
+    <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,8 +166,13 @@
     <ClInclude Include="AirplaneSupportMovement.h" />
     <ClInclude Include="BaseRunner.h" />
     <ClInclude Include="AGameObject.h" />
+    <ClInclude Include="BGMovement.h" />
     <ClInclude Include="BGObject.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GenericInputController.h" />
+    <ClInclude Include="PlayerInputController.h" />
+    <ClInclude Include="PlayerMovement.h" />
+    <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

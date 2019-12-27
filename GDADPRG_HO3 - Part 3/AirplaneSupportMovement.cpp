@@ -1,13 +1,15 @@
 #include "AirplaneSupportMovement.h"
 #include <iostream>
-AirplaneSupportMovement::AirplaneSupportMovement(string name):AComponent(name)
+
+AirplaneSupportMovement::AirplaneSupportMovement(string name): AComponent(name, Script)
 {
-	this->type = Script;
+	this->sprite = NULL;
 }
 
 AirplaneSupportMovement::~AirplaneSupportMovement()
 {
 	AComponent::~AComponent();
+	delete this->sprite;
 }
 
 void AirplaneSupportMovement::perform()

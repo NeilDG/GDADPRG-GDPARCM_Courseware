@@ -15,6 +15,11 @@ string AGameObject::getName() {
 	return this->name;
 }
 
+sf::Sprite* AGameObject::getSprite()
+{
+	return this->sprite;
+}
+
 void AGameObject::attachChild(AGameObject* child) {
 	this->childList.push_back(child);
 	child->initialize(); //initialize when attaching to child

@@ -10,9 +10,10 @@ class AGameObject; //perform forward declaration to avoid circular import depend
 class AComponent
 {
 	public:
-		AComponent(string name);
+		enum ComponentType { NotSet = -1, Script = 0, Renderer = 1, Input = 2 };
+		AComponent(string name, ComponentType type);
 		~AComponent();
-		enum ComponentType {NotSet = -1, Script = 0, Renderer = 1, Input = 2};
+
 		void attachOwner(AGameObject* owner);
 		void detachOwner();
 		AGameObject* getOwner();
