@@ -26,15 +26,15 @@ void UIButtonInputController::perform()
 	if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
 		//check if button is within mouse coord
 		sf::Vector2f mousePos(event.mouseButton.x, event.mouseButton.y);
-		sf::FloatRect bounds = button->getSprite()->getGlobalBounds();
-		std::cout << "Mouse X: " << mousePos.x << " Y: " << mousePos.y << "\n";
-		std::cout << "Bounds X: " << bounds.left << " Y: " << bounds.top << "\n";
-		if (!bounds.contains(mousePos)) {
-			return;
-		}
+		sf::FloatRect bounds = button->getWorldBounds();
 
-		button->changeButtonToPressed();
-		this->buttonListener->onButtonClick(button);
+		//std::cout << "Mouse X: " << mousePos.x << " Y: " << mousePos.y << "\n";
+		//std::cout << "Bounds X: " << bounds.left << " Y: " << bounds.top << "\n";
+
+		if (bounds.contains(mousePos)) {
+			button->changeButtonToPressed();
+			this->buttonListener->onButtonClick(button);
+		}
 	}
 	
 }

@@ -26,15 +26,13 @@ void MainMenuScreen::initialize()
 	sf::Texture* pressedTexture = TextureManager::getInstance()->getTextureAt(TextureManager::AssetType::ButtonPressed, 0);
 
 	UIButton* button = new UIButton(normalTexture, pressedTexture, "button_1");
-	//this->attachChild(button);
-	GameObjectManager::getInstance()->addObject(button);
+	this->attachChild(button);
 	button->setPosition(textureSize.x / 2 - 150, textureSize.y / 2 + 150);
 	button->setScale(0.3f, 0.3f);
 	button->setButtonListener(this);
 
 	button = new UIButton(normalTexture, pressedTexture, "button_2");
-	//this->attachChild(button);
-	GameObjectManager::getInstance()->addObject(button);
+	this->attachChild(button);
 	button->setPosition(textureSize.x / 2 + 150, textureSize.y / 2 + 150);
 	button->setScale(0.3f, 0.3f);
 	button->setButtonListener(this);

@@ -57,6 +57,27 @@ void AGameObject::setScale(float x, float y)
 	}
 }
 
+sf::FloatRect AGameObject::getLocalBounds()
+{
+	return this->sprite->getLocalBounds();
+}
+
+//SFML global bounds function does not take into account parent-child hierarchies!
+//this is the fix
+sf::FloatRect AGameObject::getWorldBounds() {
+	sf::FloatRect bounds = this->sprite->getGlobalBounds();
+
+	AGameObject* parentObj = this->parent;
+	sf::Transform transform = sf::Transform::Identity;
+	while (parentObj != NULL) {
+		transform *= parentObj->getSprite()->getTransform();
+		parentObj = parentObj->parent;
+	}
+
+	bounds = transform.transformRect(bounds);
+	return bounds;
+}
+
 sf::Vector2f AGameObject::getPosition()
 {
 	return this->sprite->getPosition();
@@ -69,6 +90,11 @@ sf::Vector2f AGameObject::getScale()
 
 AGameObject::ObjectList AGameObject::getChildren() {
 	return this->childList;
+}
+
+AGameObject* AGameObject::getParent()
+{
+	return this->parent;
 }
 
 /*void AGameObject::updateChildren(ObjectList objectList, sf::Time deltaTime) {
@@ -176,6 +202,7 @@ AGameObject::ComponentList AGameObject::getComponentsRecursiveProper(AGameObject
 void AGameObject::draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates) {
 	//apply drawing with parent-child relationship
 	targetWindow->draw(*this->sprite, renderStates); //draw the object first
+
 	renderStates.transform = this->sprite->getTransform() * renderStates.transform; //apply the transform to its children
 	//std::cout << "Drawing " + this->getName() + "\n";
 
