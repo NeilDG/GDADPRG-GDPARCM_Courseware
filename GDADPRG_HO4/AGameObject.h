@@ -15,21 +15,20 @@ class AGameObject: sf::NonCopyable
 
 		//virtual void processInput(sf::Event event) = 0;
 		//virtual void update(sf::Time deltaTime) = 0;
-		void draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates);
+		virtual void draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates);
 		string getName();
 		sf::Sprite* getSprite();
 
-		
 		void attachChild(AGameObject* child);
 		void detachChild(AGameObject* child);
-		void setPosition(float x, float y);
-		void setScale(float x, float y);
+		virtual void setPosition(float x, float y);
+		virtual void setScale(float x, float y);
 
 		sf::FloatRect getLocalBounds();
 		sf::FloatRect getWorldBounds();
 
-		sf::Vector2f getPosition();
-		sf::Vector2f getScale();
+		virtual sf::Vector2f getPosition();
+		virtual sf::Vector2f getScale();
 			
 		typedef vector<AGameObject*> ObjectList;
 		typedef vector<AComponent*> ComponentList;

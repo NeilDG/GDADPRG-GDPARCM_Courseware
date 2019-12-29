@@ -3,7 +3,8 @@
 #include "BaseRunner.h"
 #include "UIButton.h"
 #include <iostream>
-#include "GameObjectManager.h"
+#include "UIText.h"
+
 MainMenuScreen::MainMenuScreen(string name):AView(name), ButtonListener()
 {
 }
@@ -11,6 +12,7 @@ MainMenuScreen::MainMenuScreen(string name):AView(name), ButtonListener()
 MainMenuScreen::~MainMenuScreen()
 {
 	AView::~AView();
+	delete this->displayText;
 }
 
 void MainMenuScreen::initialize()
@@ -36,13 +38,20 @@ void MainMenuScreen::initialize()
 	button->setPosition(textureSize.x / 2 + 150, textureSize.y / 2 + 150);
 	button->setScale(0.3f, 0.3f);
 	button->setButtonListener(this);
+
+	this->displayText = new UIText("displayText");
+	this->attachChild(this->displayText);
+	this->displayText->setPosition(textureSize.x / 2, textureSize.y / 2 - 100);
+	this->displayText->setSize(40);
+	this->displayText->setText("Hello world!");
 }
 
 void MainMenuScreen::onButtonClick(UIButton* button)
 {
-	std::cout << "BUTTON PRESSED! " +button->getName() + "\n";
+	this->displayText->setText("BUTTON PRESSED! " + button->getName());
 }
 
 void MainMenuScreen::onButtonReleased(UIButton* button)
 {
+	this->displayText->setText("BUTTON RELEASED! " + button->getName());
 }

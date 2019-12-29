@@ -17,5 +17,6 @@ class UIButton :	public AGameObject
 		sf::Texture* normalTexture = NULL;
 		sf::Texture* pressedTexture = NULL;
 		ButtonListener* listener;
+
 };
 

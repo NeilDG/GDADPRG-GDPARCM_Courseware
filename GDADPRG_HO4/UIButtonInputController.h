@@ -22,6 +22,9 @@ class UIButtonInputController :	public GenericInputController
 		ButtonListener* buttonListener;
 
 		void perform();
+
+	private:
+		bool pressed = false;
 };
 
 

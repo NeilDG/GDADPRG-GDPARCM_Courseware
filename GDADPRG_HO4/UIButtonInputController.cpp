@@ -18,7 +18,8 @@ void UIButtonInputController::perform()
 {
 	
 	UIButton* button = (UIButton*)this->getOwner();
-	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
+	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && this->pressed) {
+		this->pressed = false;
 		button->changeButtonToNormal();
 		this->buttonListener->onButtonReleased(button);
 	}
@@ -32,6 +33,7 @@ void UIButtonInputController::perform()
 		//std::cout << "Bounds X: " << bounds.left << " Y: " << bounds.top << "\n";
 
 		if (bounds.contains(mousePos)) {
+			this->pressed = true;
 			button->changeButtonToPressed();
 			this->buttonListener->onButtonClick(button);
 		}
