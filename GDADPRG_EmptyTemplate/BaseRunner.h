@@ -5,14 +5,16 @@ using namespace std;
 class BaseRunner : private sf::NonCopyable
 {
 public:
+	static const sf::Time	TIME_PER_FRAME;
+	static const int WINDOW_WIDTH = 1024;
+	static const int WINDOW_HEIGHT = 768;
+
 	BaseRunner();
 	void run();
 
 
 private:
-	static const sf::Time	TIME_PER_FRAME;
 	sf::Time ticks;
-
 	sf::RenderWindow		window;
 
 	void render();
