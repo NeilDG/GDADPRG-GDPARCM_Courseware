@@ -57,6 +57,9 @@
     <ClCompile Include="UIText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SamplePopupScreen.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h">
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UIText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SamplePopupScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

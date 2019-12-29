@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClCompile Include="AComponent.cpp" />
     <ClCompile Include="AGameObject.cpp" />
+    <ClCompile Include="SamplePopupScreen.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="AView.cpp" />
     <ClCompile Include="BaseRunner.cpp" />
@@ -36,6 +37,7 @@
   <ItemGroup>
     <ClInclude Include="AComponent.h" />
     <ClInclude Include="AGameObject.h" />
+    <ClInclude Include="SamplePopupScreen.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="AView.h" />
     <ClInclude Include="BaseRunner.h" />

@@ -7,8 +7,5 @@ class AView :	public AGameObject
 	public:
 		AView(string name);
 		~AView();
-
-	protected:
-		AGameObject::ObjectList uiElementList;
 };
 
