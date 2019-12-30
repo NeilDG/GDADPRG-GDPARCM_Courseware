@@ -49,6 +49,20 @@ void GameObjectManager::processInput(sf::Event event) {
 	}
 }
 
+void GameObjectManager::processInputChildren(AGameObject::ObjectList objectList, sf::Event event) {
+	for (int i = 0; i < objectList.size(); i++) {
+		//replace with component update
+		AGameObject::ComponentList componentList = objectList[i]->getComponentsOfType(AComponent::ComponentType::Input);
+		for (int j = 0; j < componentList.size(); j++) {
+			GenericInputController* inputController = (GenericInputController*)componentList[j];
+			inputController->assignEvent(event);
+			inputController->perform();
+		}
+		this->processInputChildren(objectList[i]->getChildren(), event);
+	}
+}
+
+
 void GameObjectManager::update(sf::Time deltaTime)
 {
 	for (int i = 0; i < this->gameObjectList.size(); i++) {
@@ -71,19 +85,6 @@ void GameObjectManager::updateChildren(AGameObject::ObjectList objectList, sf::T
 			componentList[j]->perform();
 		}
 		this->updateChildren(objectList[i]->getChildren(), deltaTime);
-	}
-}
-
-void GameObjectManager::processInputChildren(AGameObject::ObjectList objectList, sf::Event event) {
-	for (int i = 0; i < objectList.size(); i++) {
-		//replace with component update
-		AGameObject::ComponentList componentList = objectList[i]->getComponentsOfType(AComponent::ComponentType::Input);
-		for (int j = 0; j < componentList.size(); j++) {
-			GenericInputController* inputController = (GenericInputController*)componentList[j];
-			inputController->assignEvent(event);
-			inputController->perform();
-		}
-		this->processInputChildren(objectList[i]->getChildren(), event);
 	}
 }
 

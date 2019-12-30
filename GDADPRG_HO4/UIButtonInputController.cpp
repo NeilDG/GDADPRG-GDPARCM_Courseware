@@ -41,7 +41,6 @@ void UIButtonInputController::perform()
 	
 }
 
-
 ButtonListener::ButtonListener()
 {
 }

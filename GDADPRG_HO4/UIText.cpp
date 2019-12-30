@@ -1,5 +1,6 @@
 #include "UIText.h"
 #include <iostream>
+#include "TextureManager.h"
 UIText::UIText(string name): AGameObject(name)
 {
 
@@ -16,10 +17,7 @@ void UIText::initialize()
 {
 	//declare a text to be used
 	//font must be a pointer or else it gets immediately de-allocated.
-	sf::Font* font = new sf::Font();
-	if (font->loadFromFile("Media/Sansation.ttf")) {
-		std::cout << "Font loaded successfully! \n";
-	}
+	sf::Font* font = TextureManager::getInstance()->getFont(TextureManager::FontType::DefaultFont);
 	this->text = new sf::Text();
 	this->text->setFont(*font);
 	this->setSize(40);

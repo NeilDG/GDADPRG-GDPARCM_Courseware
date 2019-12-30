@@ -26,6 +26,12 @@ void TextureManager::loadAll() {
 	texture = new sf::Texture();
 	texture->loadFromFile("Media/Textures/f.png");
 	this->textureMap[BG].push_back(texture);
+
+	sf::Font* font = new sf::Font();
+	if (font->loadFromFile("Media/Sansation.ttf")) {
+		std::cout << "Font loaded successfully! \n";
+		this->fontMap[DefaultFont] = font;
+	}
 }
 
 sf::Texture* TextureManager::getTextureAt(TextureManager::AssetType assetType, int index) {
@@ -46,6 +52,11 @@ int TextureManager::getTextureLength(TextureManager::AssetType assetType) {
 		cout << "No texture found for " << assetType;
 		return 0;
 	}
+}
+
+sf::Font* TextureManager::getFont(FontType fontType)
+{
+	return this->fontMap[fontType];
 }
 
 void TextureManager::testFunction() {

@@ -7,10 +7,14 @@ class TextureManager
 {
 public:
 	enum AssetType { BG = 0, ButtonNormal = 1, ButtonPressed = 2};
+	enum FontType {DefaultFont = 0};
 	static TextureManager* getInstance();
 	void loadAll();
 	sf::Texture* getTextureAt(TextureManager::AssetType assetType, int index);
 	int getTextureLength(TextureManager::AssetType assetType);
+	sf::Font* getFont(FontType fontType);
+
+
 	void testFunction();
 
 private:
@@ -20,5 +24,6 @@ private:
 	static TextureManager* sharedInstance;
 
 	unordered_map<TextureManager::AssetType, vector<sf::Texture*>> textureMap;
+	unordered_map<TextureManager::FontType, sf::Font*> fontMap;
 
 };
