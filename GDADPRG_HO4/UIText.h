@@ -15,6 +15,8 @@ class UIText : public AGameObject
 		void setSize(int size);
 		void setPosition(float x, float y);
 		void setScale(float x, float y);
+		sf::FloatRect getLocalBounds();
+		sf::FloatRect getWorldBounds();
 		sf::Vector2f getPosition();
 		sf::Vector2f getScale();
 		string getText();

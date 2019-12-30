@@ -25,13 +25,35 @@ void TextureManager::loadAll() {
 
 	texture = new sf::Texture();
 	texture->loadFromFile("Media/Textures/f.png");
-	this->textureMap[BG].push_back(texture);
+	this->textureMap[UI_BG].push_back(texture);
+
+	texture = new sf::Texture();
+	texture->loadFromFile("Media/Textures/bar_1.png");
+	this->textureMap[HUD_BG].push_back(texture);
 
 	sf::Font* font = new sf::Font();
 	if (font->loadFromFile("Media/Sansation.ttf")) {
 		std::cout << "Font loaded successfully! \n";
 		this->fontMap[DefaultFont] = font;
 	}
+
+	texture = new sf::Texture();
+	texture->loadFromFile("Media/Textures/Eagle.png");
+	this->textureMap[Eagle].push_back(texture);
+
+	texture = new sf::Texture();
+	texture->loadFromFile("Media/Textures/Desert.png");
+	texture->setRepeated(true);
+	this->textureMap[BG].push_back(texture);
+
+	texture = new sf::Texture();
+	texture->loadFromFile("Media/Textures/Raptor.png");
+	texture->setRepeated(true);
+	this->textureMap[Raptor].push_back(texture);
+
+	texture = new sf::Texture();
+	texture->loadFromFile("Media/Textures/spike.png");
+	this->textureMap[Spike].push_back(texture);
 }
 
 sf::Texture* TextureManager::getTextureAt(TextureManager::AssetType assetType, int index) {

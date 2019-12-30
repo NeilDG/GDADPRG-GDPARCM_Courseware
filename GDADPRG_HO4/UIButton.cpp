@@ -13,7 +13,9 @@ UIButton::UIButton(sf::Texture* normalTexture, sf::Texture* pressedTexture, stri
 
 UIButton::~UIButton()
 {
-	delete this->listener;
+	/*if (this->listener != NULL) {
+		delete this->listener;
+	}*/
 	AGameObject::~AGameObject();
 }
 

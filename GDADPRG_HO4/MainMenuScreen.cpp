@@ -13,18 +13,17 @@ MainMenuScreen::MainMenuScreen(string name):AView(name), ButtonListener()
 
 MainMenuScreen::~MainMenuScreen()
 {
-	AView::~AView();
 	delete this->displayText;
+	AView::~AView();
 }
 
 void MainMenuScreen::initialize()
 {
 	this->sprite = new sf::Sprite();
-	this->sprite->setTexture(*TextureManager::getInstance()->getTextureAt(TextureManager::AssetType::BG, 0));
+	this->sprite->setTexture(*TextureManager::getInstance()->getTextureAt(TextureManager::AssetType::UI_BG, 0));
 	sf::Vector2u textureSize = this->sprite->getTexture()->getSize();
 	this->sprite->setOrigin(textureSize.x / 2, textureSize.y / 2);
 	this->setPosition(BaseRunner::WINDOW_WIDTH / 2, BaseRunner::WINDOW_HEIGHT / 2);
-	//this->setScale(0.5f, 0.5f);
 
 	sf::Texture* normalTexture = TextureManager::getInstance()->getTextureAt(TextureManager::AssetType::ButtonNormal, 0);
 	sf::Texture* pressedTexture = TextureManager::getInstance()->getTextureAt(TextureManager::AssetType::ButtonPressed, 0);

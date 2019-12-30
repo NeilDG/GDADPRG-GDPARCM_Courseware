@@ -8,9 +8,19 @@ UIText::UIText(string name): AGameObject(name)
 
 UIText::~UIText()
 {
-	delete this->text->getFont();
 	delete this->text;
-	AGameObject::~AGameObject();
+
+	std::cout << "Deleting UI TEXT " << this->getName() << "! Size: " << this->childList.size() << "\n";
+	for (int i = 0; i < this->childList.size(); i++) {
+		delete this->childList[i];
+	}
+
+	for (int i = 0; i < this->componentList.size(); i++) {
+		delete this->componentList[i];
+	}
+
+	this->childList.clear(); this->childList.shrink_to_fit();
+	this->componentList.clear(); this->componentList.shrink_to_fit();
 }
 
 void UIText::initialize()
@@ -58,17 +68,25 @@ void UIText::setStyle(sf::Color fillColor, sf::Color outlineColor, float outline
 
 void UIText::setSize(int size)
 {
+	sf::FloatRect bounds = this->getWorldBounds();
+	this->text->setOrigin(bounds.left +
+		bounds.width / 2,
+		bounds.top +
+		bounds.height / 2); //auto align to center.
+
 	this->text->setCharacterSize(size);
-	this->text->setOrigin(this->text->getLocalBounds().left + 
-		this->text->getLocalBounds().width / 2,
-		this->text->getLocalBounds().top +
-		this->text->getLocalBounds().height / 2); //auto align to center.
 }
+	
 
 //must be called after being registered to the game object manager or one of the parent game objects
 void UIText::setPosition(float x, float y)
 {
 	if (this->text != NULL) {
+		sf::FloatRect bounds = this->getWorldBounds();
+		this->text->setOrigin(bounds.left +
+			bounds.width / 2,
+			bounds.top +
+			bounds.height / 2); //auto align to center.
 		this->text->setPosition(x, y);
 	}
 }
@@ -78,6 +96,26 @@ void UIText::setScale(float x, float y)
 	if (this->text != NULL) {
 		this->text->setScale(x, y);
 	}
+}
+
+sf::FloatRect UIText::getLocalBounds()
+{
+	return sf::FloatRect();
+}
+
+sf::FloatRect UIText::getWorldBounds()
+{
+	sf::FloatRect bounds = this->text->getGlobalBounds();
+
+	AGameObject* parentObj = this->parent;
+	sf::Transform transform = sf::Transform::Identity;
+	while (parentObj != NULL) {
+		transform *= parentObj->getSprite()->getTransform();
+		parentObj = parentObj->getParent();
+	}
+
+	bounds = transform.transformRect(bounds);
+	return bounds;
 }
 
 sf::Vector2f UIText::getPosition()

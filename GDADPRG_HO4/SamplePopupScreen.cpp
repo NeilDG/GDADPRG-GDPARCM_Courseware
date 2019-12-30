@@ -18,10 +18,10 @@ SamplePopupScreen::~SamplePopupScreen()
 void SamplePopupScreen::initialize()
 {
 	this->sprite = new sf::Sprite();
-	this->sprite->setTexture(*TextureManager::getInstance()->getTextureAt(TextureManager::AssetType::BG, 0));
+	this->sprite->setTexture(*TextureManager::getInstance()->getTextureAt(TextureManager::AssetType::UI_BG, 0));
 	sf::Vector2u textureSize = this->sprite->getTexture()->getSize();
 	this->sprite->setOrigin(textureSize.x / 2, textureSize.y / 2);
-	this->sprite->setColor(sf::Color::Cyan);
+	//this->sprite->setColor(sf::Color::Cyan);
 	this->setPosition(BaseRunner::WINDOW_WIDTH / 2, BaseRunner::WINDOW_HEIGHT / 2);
 	this->setScale(0.75f, 0.75f);
 
@@ -44,7 +44,7 @@ void SamplePopupScreen::initialize()
 	this->attachChild(displayText);
 	displayText->setPosition(textureSize.x / 2, textureSize.y / 2 - 100);
 	displayText->setSize(40);
-	displayText->setText("This is another popup");
+	displayText->setText("Hello World!");
 }
 
 void SamplePopupScreen::onButtonClick(UIButton* button)

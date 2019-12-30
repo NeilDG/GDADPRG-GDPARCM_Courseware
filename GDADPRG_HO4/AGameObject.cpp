@@ -7,8 +7,35 @@ AGameObject::AGameObject(string name)
 }
 
 AGameObject::~AGameObject() {
-	delete this->sprite;
-	delete this->texture;
+	
+	if (this->getName() == "") {
+		return; 
+		//name becomes null if pointer was released (but not THIS instance??). 
+		//This causes read access violation if further deletion is performed.
+	}
+	std::cout << "Deleting " << this->getName() << "! Size: " << this->childList.size() << "\n";
+
+	for (int i = 0; i < this->childList.size(); i++) {
+		delete this->childList[i];
+	}
+
+	for (int i = 0; i < this->componentList.size(); i++) {
+		delete this->componentList[i];
+	}
+
+	this->childList.clear(); this->childList.shrink_to_fit();
+	this->componentList.clear(); this->componentList.shrink_to_fit();
+
+	if (this->sprite != NULL) {
+		delete this->sprite;
+	}
+	if (this->texture != NULL) {
+		delete this->texture;
+	}
+	if (this->parent != NULL) {
+		this->parent = NULL; //do not call delete this->parent! Creates a stack overflow.
+	}
+
 }
 
 string AGameObject::getName() {

@@ -10,7 +10,7 @@ class AGameObject: sf::NonCopyable
 {
 	public:
 		AGameObject(string name);
-		~AGameObject();
+		virtual ~AGameObject();
 		virtual void initialize() = 0;
 
 		//virtual void processInput(sf::Event event) = 0;
@@ -24,8 +24,8 @@ class AGameObject: sf::NonCopyable
 		virtual void setPosition(float x, float y);
 		virtual void setScale(float x, float y);
 
-		sf::FloatRect getLocalBounds();
-		sf::FloatRect getWorldBounds();
+		virtual sf::FloatRect getLocalBounds();
+		virtual sf::FloatRect getWorldBounds();
 
 		virtual sf::Vector2f getPosition();
 		virtual sf::Vector2f getScale();

@@ -6,7 +6,7 @@ using namespace std;
 class TextureManager
 {
 public:
-	enum AssetType { BG = 0, ButtonNormal = 1, ButtonPressed = 2};
+	enum AssetType { BG = 0, Eagle = 1, Raptor = 2, Spike = 3, UI_BG = 4, ButtonNormal = 5, ButtonPressed = 6, HUD_BG = 7};
 	enum FontType {DefaultFont = 0};
 	static TextureManager* getInstance();
 	void loadAll();
