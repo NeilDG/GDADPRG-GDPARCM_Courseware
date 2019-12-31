@@ -43,6 +43,7 @@ BaseRunner::BaseRunner() :
 
 	GameObjectManager::getInstance()->addObject(airplane);
 
+	srand(time(NULL));
 	//TEST: Create N enemies
 	for (int i = 0; i < 50; i++) {
 		EnemyAirplane* enemy = new EnemyAirplane(i, "enemy_" + to_string(i));
@@ -62,7 +63,6 @@ void BaseRunner::run() {
 	while (this->window.isOpen())
 	{
 		sf::Time elapsedTime = clock.restart();
-		srand(elapsedTime.asMicroseconds());
 		timeSinceLastUpdate += elapsedTime;
 		while (timeSinceLastUpdate > TIME_PER_FRAME)
 		{

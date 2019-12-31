@@ -1,6 +1,8 @@
 #include "EnemyBehavior.h"
 #include "AGameObject.h"
 #include <iostream>
+#include "BaseRunner.h";
+
 EnemyBehavior::EnemyBehavior(string name): AComponent(name, Script)
 {
 	//this->delay = (rand() % 3);
@@ -23,10 +25,11 @@ void EnemyBehavior::perform()
 		std::cout << "Ticks greater! " << this->getOwner()->getName() << "\n";
 	}
 	else {
-		//std::cout << "Ticks value: "<< this->ticks << "from " << this->getOwner()->getName() << "\n";
+		//std::cout << "Ticks value: "<< this->ticks << "from " << this->getOwner()->getName() << "Delay: " << this->delay <<"\n";
+		//return;
 	}
 
-	if (this->ticks > 2.0f && this->movementType != Side) {
+	if (this->ticks > 2.0f && this->movementType != Side && this->movementType != Delay) {
 		//change movement type every X seconds
 		int counter = (this->movementType + 1) % EnemyMovementType::Side + 1;
 		this->movementType = (EnemyMovementType) counter;
@@ -40,12 +43,17 @@ void EnemyBehavior::perform()
 		sprite->move(0, this->deltaTime.asSeconds() * (SPEED_MULTIPLIER / 2.0f));
 	}
 	else if (this->movementType == Side) {
-		sprite->move(this->deltaTime.asSeconds() * SPEED_MULTIPLIER * 1.5, 0);
+		if (this->getOwner()->getPosition().x > BaseRunner::WINDOW_WIDTH / 2) {
+			sprite->move(this->deltaTime.asSeconds() * SPEED_MULTIPLIER * 1.5, 0);
+		}
+		else {
+			sprite->move(-this->deltaTime.asSeconds() * SPEED_MULTIPLIER * 1.5, 0);
+		}
+		
 	}
 }
 
-void EnemyBehavior::addDelay(float delay)
+void EnemyBehavior::configure(float delay)
 {
 	this->delay += delay;
-	std::cout << "Delay: " << this->delay << "\n";
 }

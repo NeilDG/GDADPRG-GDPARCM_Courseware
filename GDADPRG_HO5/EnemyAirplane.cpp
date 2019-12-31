@@ -23,10 +23,13 @@ void EnemyAirplane::initialize()
 	this->sprite->setOrigin(textureSize.x / 2, textureSize.y / 2);
 	
 	this->setPosition(BaseRunner::WINDOW_WIDTH / 2, -30);
+	//randomize
+	this->sprite->move(rand() % 300 - rand() % 300, 0);
 	this->sprite->setRotation(180); //must face towards player
 
 	EnemyBehavior* behavior = new EnemyBehavior("EnemyBehavior");
-	behavior->addDelay(this->counter);
+	int random = rand() % 2;
+	behavior->configure(this->counter);
 	this->attachComponent(behavior);
 
 }
