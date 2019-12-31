@@ -67,24 +67,28 @@ void GameObjectManager::update(sf::Time deltaTime)
 {
 	for (int i = 0; i < this->gameObjectList.size(); i++) {
 		//replace with component update
-		AGameObject::ComponentList componentList = this->gameObjectList[i]->getComponentsOfType(AComponent::ComponentType::Script);
-		for (int j = 0; j < componentList.size(); j++) {
-			componentList[j]->setDeltaTime(deltaTime);
-			componentList[j]->perform();
+		if (this->gameObjectList[i]->isEnabled()) {
+			AGameObject::ComponentList componentList = this->gameObjectList[i]->getComponentsOfType(AComponent::ComponentType::Script);
+			for (int j = 0; j < componentList.size(); j++) {
+				componentList[j]->setDeltaTime(deltaTime);
+				componentList[j]->perform();
+			}
+			this->updateChildren(this->gameObjectList[i]->getChildren(), deltaTime);
 		}
-		this->updateChildren(this->gameObjectList[i]->getChildren(), deltaTime);
 	}
 }
 
 void GameObjectManager::updateChildren(AGameObject::ObjectList objectList, sf::Time deltaTime) {
 	for (int i = 0; i < objectList.size(); i++) {
 		//replace with component update
-		AGameObject::ComponentList componentList = objectList[i]->getComponentsOfType(AComponent::ComponentType::Script);
-		for (int j = 0; j < componentList.size(); j++) {
-			componentList[j]->setDeltaTime(deltaTime);
-			componentList[j]->perform();
+		if (objectList[i]->isEnabled()) {
+			AGameObject::ComponentList componentList = objectList[i]->getComponentsOfType(AComponent::ComponentType::Script);
+			for (int j = 0; j < componentList.size(); j++) {
+				componentList[j]->setDeltaTime(deltaTime);
+				componentList[j]->perform();
+			}
+			this->updateChildren(objectList[i]->getChildren(), deltaTime);
 		}
-		this->updateChildren(objectList[i]->getChildren(), deltaTime);
 	}
 }
 

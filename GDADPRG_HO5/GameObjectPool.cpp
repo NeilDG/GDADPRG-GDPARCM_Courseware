@@ -20,7 +20,14 @@ void GameObjectPool::initialize()
 {
 	for (int i = 0; i < this->maxPoolSize; i++) {
 		APoolable* poolableObject = this->objectCopy->clone();
-		poolableObject->initialize();
+		//instantiate object but disable it.
+		if (this->parent != NULL) {
+			this->parent->attachChild(poolableObject);
+		}
+		else {
+			GameObjectManager::getInstance()->addObject(poolableObject);
+		}
+		poolableObject->setEnabled(false);
 		this->availableObjects.push_back(poolableObject);
 	}
 }
@@ -37,11 +44,12 @@ APoolable* GameObjectPool::requestPoolable()
 		this->availableObjects.erase(this->availableObjects.begin() + this->availableObjects.size() - 1);
 		this->usedObjects.push_back(poolableObject);
 
+		std::cout << "Requested object. Available: " << this->availableObjects.size() << " Used: " << this->usedObjects.size() << "\n";
 		this->setEnabled(poolableObject, true);
 		return poolableObject;
 	}
 	else {
-		std::cout << " No more poolable " + this->objectCopy->getName() + " available!";
+		std::cout << " No more poolable " + this->objectCopy->getName() + " available! \n";
 		return NULL;
 	}
 }
@@ -72,10 +80,12 @@ void GameObjectPool::releasePoolable(APoolable* poolableObject)
 			break;
 		}
 	}
-
-	this->usedObjects.erase(this->usedObjects.begin() + index);
-	this->availableObjects.push_back(poolableObject);
-	this->setEnabled(poolableObject, false);
+	std::cout << "Poolable index in used: " << index << "\n";
+	if (index > -1) {
+		this->usedObjects.erase(this->usedObjects.begin() + index);
+		this->availableObjects.push_back(poolableObject);
+		this->setEnabled(poolableObject, false);
+	}
 
 }
 
@@ -94,25 +104,11 @@ string GameObjectPool::getTag()
 void GameObjectPool::setEnabled(APoolable* poolableObject, bool flag)
 {
 	if (flag) {
-		//set parent
-		if (this->parent != NULL) {
-			this->parent->attachChild(poolableObject);
-		}
-		else {
-			GameObjectManager::getInstance()->addObject(poolableObject);
-		}
-
+		poolableObject->setEnabled(true);
 		poolableObject->onActivate();
 	}
 	else {
-		//set parent
-		if (this->parent != NULL) {
-			this->parent->detachChild(poolableObject);
-		}
-		else {
-			GameObjectManager::getInstance()->deleteObject(poolableObject);
-		}
-
+		poolableObject->setEnabled(false);
 		poolableObject->onRelease();
 	}
 	

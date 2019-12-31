@@ -6,7 +6,7 @@
 
 EnemyAirplane::EnemyAirplane(string name): APoolable(name)
 {
-	this->counter = counter;
+	
 }
 
 EnemyAirplane::~EnemyAirplane()
@@ -28,8 +28,6 @@ void EnemyAirplane::initialize()
 	this->sprite->setRotation(180); //must face towards player
 
 	EnemyBehavior* behavior = new EnemyBehavior("EnemyBehavior");
-	int random = rand() % 2;
-	behavior->configure(this->counter);
 	this->attachComponent(behavior);
 
 }
@@ -42,6 +40,11 @@ void EnemyAirplane::onRelease()
 void EnemyAirplane::onActivate()
 {
 	//reset state
+	EnemyBehavior* behavior = (EnemyBehavior*)this->findComponentByName("EnemyBehavior");
+	behavior->reset();
+	this->setPosition(BaseRunner::WINDOW_WIDTH / 2, -30);
+	//randomize
+	this->sprite->move(rand() % 300 - rand() % 300, 0);
 }
 
 APoolable* EnemyAirplane::clone()

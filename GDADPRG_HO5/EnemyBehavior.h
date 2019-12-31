@@ -9,11 +9,13 @@ class EnemyBehavior :	public AComponent
 		~EnemyBehavior();
 		void perform();
 		void configure(float delay);
+		void reset();
 
 	private:
 		const float SPEED_MULTIPLIER = 100.0f;
-		EnemyMovementType movementType = Delay;
+		EnemyMovementType movementType = Forward;
 		float ticks = 0.0f;
 		float delay = 0.0f;
+		float forwardDuration = 0.0f;
 };
 

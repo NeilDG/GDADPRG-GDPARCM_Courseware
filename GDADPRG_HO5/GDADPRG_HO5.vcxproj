@@ -28,8 +28,10 @@
     <ClCompile Include="BGMovement.cpp" />
     <ClCompile Include="BGObject.cpp" />
     <ClCompile Include="ApplicationManager.cpp" />
+    <ClCompile Include="EmptyGameObject.cpp" />
     <ClCompile Include="EnemyAirplane.cpp" />
     <ClCompile Include="EnemyBehavior.cpp" />
+    <ClCompile Include="EnemySwarmHandler.cpp" />
     <ClCompile Include="GameObjectPool.cpp" />
     <ClCompile Include="HUDScreen.cpp" />
     <ClCompile Include="ObjectPoolHolder.cpp" />
@@ -61,8 +63,10 @@
     <ClInclude Include="BGMovement.h" />
     <ClInclude Include="BGObject.h" />
     <ClInclude Include="ApplicationManager.h" />
+    <ClInclude Include="EmptyGameObject.h" />
     <ClInclude Include="EnemyAirplane.h" />
     <ClInclude Include="EnemyBehavior.h" />
+    <ClInclude Include="EnemySwarmHandler.h" />
     <ClInclude Include="GameObjectPool.h" />
     <ClInclude Include="HUDScreen.h" />
     <ClInclude Include="ObjectPoolHolder.h" />

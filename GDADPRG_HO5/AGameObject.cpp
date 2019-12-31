@@ -237,3 +237,13 @@ void AGameObject::draw(sf::RenderWindow* targetWindow, sf::RenderStates renderSt
 		child->draw(targetWindow, renderStates);
 	}
 }
+
+void AGameObject::setEnabled(bool flag)
+{
+	this->enabled = flag;
+}
+
+bool AGameObject::isEnabled()
+{
+	return this->enabled;
+}

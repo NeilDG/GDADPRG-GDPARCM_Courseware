@@ -45,6 +45,9 @@ class AGameObject: sf::NonCopyable
 		ComponentList getComponentsOfType(AComponent::ComponentType type);
 		ComponentList getComponentsOfTypeRecursive(AComponent::ComponentType type);
 
+		void setEnabled(bool flag);
+		bool isEnabled();
+
 	protected:
 		string name;
 		sf::Sprite* sprite;
@@ -58,7 +61,7 @@ class AGameObject: sf::NonCopyable
 
 	private:
 		ComponentList getComponentsRecursiveProper(AGameObject* object, AComponent::ComponentType type, ComponentList foundList);
-		bool enabled = false;
+		bool enabled = true;
 
 };
 
