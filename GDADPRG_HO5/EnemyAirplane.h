@@ -1,11 +1,14 @@
 #pragma once
-#include "AGameObject.h"
-class EnemyAirplane :	public AGameObject
+#include "APoolable.h"
+class EnemyAirplane :	public APoolable
 {
 	public:
-		EnemyAirplane(int counter, string name);
+		EnemyAirplane(string name);
 		~EnemyAirplane();
 		void initialize();
+		void onRelease();
+		void onActivate();
+		APoolable* clone();
 
 	private:
 		int counter = 0;

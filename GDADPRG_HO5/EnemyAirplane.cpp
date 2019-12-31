@@ -4,7 +4,7 @@
 #include "EnemyBehavior.h"
 #include <iostream>
 
-EnemyAirplane::EnemyAirplane(int counter, string name): AGameObject(name)
+EnemyAirplane::EnemyAirplane(string name): APoolable(name)
 {
 	this->counter = counter;
 }
@@ -32,4 +32,20 @@ void EnemyAirplane::initialize()
 	behavior->configure(this->counter);
 	this->attachComponent(behavior);
 
+}
+
+void EnemyAirplane::onRelease()
+{
+	
+}
+
+void EnemyAirplane::onActivate()
+{
+	//reset state
+}
+
+APoolable* EnemyAirplane::clone()
+{
+	APoolable* copyObj = new EnemyAirplane(this->name);
+	return copyObj;
 }

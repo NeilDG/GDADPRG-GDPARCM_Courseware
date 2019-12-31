@@ -9,6 +9,8 @@
 #include "MainMenuScreen.h"
 #include "ApplicationManager.h"
 #include "EnemyAirplane.h"
+#include "GameObjectPool.h"
+#include "ObjectPoolHolder.h"
 
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
@@ -44,11 +46,16 @@ BaseRunner::BaseRunner() :
 	GameObjectManager::getInstance()->addObject(airplane);
 
 	srand(time(NULL));
+	GameObjectPool* enemyPool = new GameObjectPool(ObjectPoolHolder::ENEMY_POOL_TAG, new EnemyAirplane("enemy"), 10, NULL);
+	enemyPool->initialize();
+	ObjectPoolHolder::getInstance()->registerObjectPool(enemyPool);
+	enemyPool->requestPoolableBatch(3);
+
 	//TEST: Create N enemies
-	for (int i = 0; i < 50; i++) {
+	/*for (int i = 0; i < 50; i++) {
 		EnemyAirplane* enemy = new EnemyAirplane(i, "enemy_" + to_string(i));
 		GameObjectManager::getInstance()->addObject(enemy);
-	}
+	}*/
 
 	HUDScreen* hudScreen = new HUDScreen("HUDScreen");
 	GameObjectManager::getInstance()->addObject(hudScreen);
