@@ -7,6 +7,7 @@
 #include "GameObjectManager.h"
 #include "SceneManager.h"
 #include <iostream>
+#include "GameObjectManager.h"
 
 QuitScreen::QuitScreen(string name): AView(name), ButtonListener()
 {
@@ -14,7 +15,6 @@ QuitScreen::QuitScreen(string name): AView(name), ButtonListener()
 
 QuitScreen::~QuitScreen()
 {
-	delete this->displayText;
 	AView::~AView();
 	ButtonListener::~ButtonListener();
 }
@@ -54,16 +54,16 @@ void QuitScreen::initialize()
 	button_2Text->setSize(100);
 	button_2Text->setText("NO");
 
-	this->displayText = new UIText("displayText");
-	this->attachChild(this->displayText);
-	this->displayText->setPosition(textureSize.x / 2, textureSize.y / 2 - 100);
-	this->displayText->setSize(40);
+	UIText* displayText = new UIText("displayText");
+	this->attachChild(displayText);
+	displayText->setPosition(textureSize.x / 2, textureSize.y / 2 - 100);
+	displayText->setSize(40);
 
 	if (this->forMainMenu) {
-		this->displayText->setText("Are you sure you want \n to quit the game?");
+		displayText->setText("Are you sure you want \n to quit the game?");
 	}
 	else {
-		this->displayText->setText("Are you sure you want \n to return to the main menu?");
+		displayText->setText("Are you sure you want \n to return to the main menu?");
 	}
 	
 
@@ -82,7 +82,6 @@ void QuitScreen::onButtonReleased(UIButton* button)
 			ApplicationManager::getInstance()->applicationQuit();
 		}
 		else {
-			std::cout << "Return to main menu! \n";
 			SceneManager::getInstance()->loadScene(SceneManager::MAIN_MENU_SCENE_NAME);
 			ApplicationManager::getInstance()->resumeApplication();
 		}

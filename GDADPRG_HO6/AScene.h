@@ -17,14 +17,9 @@ class AScene
 		virtual void onUnloadObjects();
 
 		string getSceneName();
-		typedef std::vector<AGameObject*> ObjectList;
 
 	protected:
 		void registerObject(AGameObject* object); //IMPORTANT: This must be called for every object to be loaded/unloaded.
 		string sceneName;
-		ObjectList sceneObjects;
-
-		
-
 };
 

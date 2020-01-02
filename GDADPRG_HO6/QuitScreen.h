@@ -18,6 +18,5 @@ class QuitScreen :	public AView, public ButtonListener
 
 	private:
 		bool forMainMenu = false;
-		UIText* displayText;
 };
 

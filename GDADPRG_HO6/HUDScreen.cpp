@@ -49,7 +49,7 @@ void HUDScreen::onButtonClick(UIButton* button)
 void HUDScreen::onButtonReleased(UIButton* button)
 {
 	if (button->getName() == "quitBtn") {
-		QuitScreen* quitScreen = new QuitScreen("quitScreen");
+		QuitScreen* quitScreen = new QuitScreen("QuitScreen");
 		GameObjectManager::getInstance()->addObject(quitScreen);
 	}
 }

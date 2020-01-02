@@ -15,7 +15,7 @@ BGObject::~BGObject()
 
 void BGObject::initialize()
 {
-	std::cout << "Declared as " << this->getName() << "\n";
+	//std::cout << "Declared as " << this->getName() << "\n";
 
 	//assign texture
 	this->sprite = new sf::Sprite();

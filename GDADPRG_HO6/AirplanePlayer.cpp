@@ -16,7 +16,7 @@ AirplanePlayer::~AirplanePlayer()
 }
 
 void AirplanePlayer::initialize() {
-	std::cout << "Declared as " << this->getName() << "\n";
+	//std::cout << "Declared as " << this->getName() << "\n";
 
 	//assign texture
 	this->sprite = new sf::Sprite();
