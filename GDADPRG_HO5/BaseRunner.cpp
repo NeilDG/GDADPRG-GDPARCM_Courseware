@@ -17,7 +17,7 @@
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
 BaseRunner::BaseRunner() :
-	window(sf::VideoMode(1024, 768), "HO: UI System", sf::Style::Close) {
+	window(sf::VideoMode(1024, 768), "HO: Object Pooling", sf::Style::Close) {
 
 	ApplicationManager::initialize(&this->window);
 
@@ -50,7 +50,7 @@ BaseRunner::BaseRunner() :
 	//create N enemies via object pooling
 	srand(time(NULL));
 	EmptyGameObject* enemiesManager = new EmptyGameObject("EnemiesManager");
-	EnemySwarmHandler* swarmHandler = new EnemySwarmHandler(20, "SwarmHandler");
+	EnemySwarmHandler* swarmHandler = new EnemySwarmHandler(200, "SwarmHandler");
 	enemiesManager->attachComponent(swarmHandler);
 	GameObjectManager::getInstance()->addObject(enemiesManager);
 

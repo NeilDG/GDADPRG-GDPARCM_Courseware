@@ -9,7 +9,7 @@ class EnemySwarmHandler :	public AComponent
 		void perform();
 
 	private:
-		const float SPAWN_INTERVAL = 0.12f;
+		const float SPAWN_INTERVAL = 0.01f;
 		float ticks = 0.0f;
 };
 

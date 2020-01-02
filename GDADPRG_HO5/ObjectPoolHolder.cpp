@@ -20,6 +20,7 @@ void ObjectPoolHolder::registerObjectPool(GameObjectPool* pool)
 
 void ObjectPoolHolder::unregisterObjectPool(GameObjectPool* pool)
 {
+	delete pool;
 	this->poolMap.erase(pool->getTag());
 }
 

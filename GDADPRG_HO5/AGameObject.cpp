@@ -234,7 +234,9 @@ void AGameObject::draw(sf::RenderWindow* targetWindow, sf::RenderStates renderSt
 	//draw its children
 	for (int i = 0; i < this->childList.size(); i++) {
 		AGameObject* child = this->childList[i];
-		child->draw(targetWindow, renderStates);
+		if (child->isEnabled()) {
+			child->draw(targetWindow, renderStates);
+		}
 	}
 }
 

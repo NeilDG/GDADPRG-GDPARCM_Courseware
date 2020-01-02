@@ -38,27 +38,31 @@ int GameObjectManager::activeObjects()
 void GameObjectManager::processInput(sf::Event event) {
 	for (int i = 0; i < this->gameObjectList.size(); i++) {
 		//replace with component update
-		AGameObject::ComponentList componentList = this->gameObjectList[i]->getComponentsOfType(AComponent::ComponentType::Input);
-		for (int j = 0; j < componentList.size(); j++) {
-			GenericInputController* inputController = (GenericInputController*) componentList[j];
-			inputController->assignEvent(event);
-			inputController->perform();
-		}
+		if (this->gameObjectList[i]->isEnabled()) {
+			AGameObject::ComponentList componentList = this->gameObjectList[i]->getComponentsOfType(AComponent::ComponentType::Input);
+			for (int j = 0; j < componentList.size(); j++) {
+				GenericInputController* inputController = (GenericInputController*)componentList[j];
+				inputController->assignEvent(event);
+				inputController->perform();
+			}
 
-		this->processInputChildren(this->gameObjectList[i]->getChildren(), event);
+			this->processInputChildren(this->gameObjectList[i]->getChildren(), event);
+		}
 	}
 }
 
 void GameObjectManager::processInputChildren(AGameObject::ObjectList objectList, sf::Event event) {
 	for (int i = 0; i < objectList.size(); i++) {
-		//replace with component update
-		AGameObject::ComponentList componentList = objectList[i]->getComponentsOfType(AComponent::ComponentType::Input);
-		for (int j = 0; j < componentList.size(); j++) {
-			GenericInputController* inputController = (GenericInputController*)componentList[j];
-			inputController->assignEvent(event);
-			inputController->perform();
+		if (objectList[i]->isEnabled()) {
+			//replace with component update
+			AGameObject::ComponentList componentList = objectList[i]->getComponentsOfType(AComponent::ComponentType::Input);
+			for (int j = 0; j < componentList.size(); j++) {
+				GenericInputController* inputController = (GenericInputController*)componentList[j];
+				inputController->assignEvent(event);
+				inputController->perform();
+			}
+			this->processInputChildren(objectList[i]->getChildren(), event);
 		}
-		this->processInputChildren(objectList[i]->getChildren(), event);
 	}
 }
 
@@ -95,7 +99,9 @@ void GameObjectManager::updateChildren(AGameObject::ObjectList objectList, sf::T
 //draws the object if it contains a sprite
 void GameObjectManager::draw(sf::RenderWindow* window) {
 	for (int i = 0; i < this->gameObjectList.size(); i++) {
-		this->gameObjectList[i]->draw(window, sf::RenderStates::Default);
+		if (this->gameObjectList[i]->isEnabled()) {
+			this->gameObjectList[i]->draw(window, sf::RenderStates::Default);
+		}
 	}
 }
 
