@@ -1,7 +1,6 @@
 #include "BaseRunner.h"
 
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
-
 BaseRunner::BaseRunner() :
 	window(sf::VideoMode(1024, 768), "HO: Empty Template", sf::Style::Close) {
 

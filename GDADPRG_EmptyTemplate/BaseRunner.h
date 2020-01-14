@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
-
 using namespace std;
 class BaseRunner : private sf::NonCopyable
 {
