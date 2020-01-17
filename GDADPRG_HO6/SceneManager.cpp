@@ -40,6 +40,12 @@ void SceneManager::unloadScene()
 	}
 }
 
+bool SceneManager::isSceneLoaded(string name)
+{
+	return this->activeScene->getSceneName() == name;
+}
+
+
 /*void SceneManager::unloadAllActiveScenes()
 {
 	SceneList activeList;
@@ -52,8 +58,3 @@ void SceneManager::unloadScene()
 		this->unloadScene(activeList[i]);
 	}
 }*/
-
-bool SceneManager::isSceneLoaded(string name)
-{
-	return this->activeScene->getSceneName() == name;
-}

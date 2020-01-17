@@ -8,13 +8,11 @@ AScene::AScene(string sceneName)
 
 AScene::~AScene()
 {
+
 }
 
 void AScene::onUnloadObjects()
 {
-	/*for (int i = 0; i < this->sceneObjects.size(); i++) {
-		GameObjectManager::getInstance()->deleteObject(this->sceneObjects[i]);
-	}*/
 	GameObjectManager::getInstance()->deleteAllObjectsInScene();
 }
 

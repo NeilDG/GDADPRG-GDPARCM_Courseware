@@ -1,6 +1,5 @@
 #pragma once
 #include "AGameObject.h"
-#include "GameObjectManager.h"
 
 //deals with loading of resources, and loading of objects, then registering them to object manager.
 //also does the opposite, unloading.
