@@ -24,6 +24,9 @@ void PlayerInputController::perform()
 	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A) {
 		this->moveLeft = true;
 	}
+	else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space) {
+		this->fire = true;
+	}
 	else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::W) {
 		this->moveUp = false;
 	}
@@ -35,6 +38,9 @@ void PlayerInputController::perform()
 	}
 	else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::A) {
 		this->moveLeft = false;
+	}
+	else if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Space) {
+		this->fire = false;
 	}
 }
 
@@ -56,4 +62,11 @@ bool PlayerInputController::isLeft()
 bool PlayerInputController::isRight()
 {
 	return this->moveRight;
+}
+
+bool PlayerInputController::hasFired()
+{
+	bool result = this->fire;
+	//this->fire = false;
+	return result;
 }

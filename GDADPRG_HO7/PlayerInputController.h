@@ -12,6 +12,7 @@ class PlayerInputController :	public GenericInputController
 		bool isDown();
 		bool isLeft();
 		bool isRight();
+		bool hasFired();
 
 	private:
 		const float SPEED_MULTIPLIER = 300.0f;
@@ -19,5 +20,6 @@ class PlayerInputController :	public GenericInputController
 		bool moveDown = false;
 		bool moveLeft = false;
 		bool moveRight = false;
+		bool fire = false;
 };
 

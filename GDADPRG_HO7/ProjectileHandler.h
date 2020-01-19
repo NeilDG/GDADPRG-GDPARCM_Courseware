@@ -8,7 +8,7 @@ class ProjectileHandler :	public AComponent
 		void perform();
 
 	private:
-		const float SPAWN_INTERVAL = 0.3f;
+		const float SPAWN_INTERVAL = 0.15f;
 		float ticks = 0.0f;
 };
 

@@ -45,13 +45,13 @@ void GameScene::onLoadObjects()
 	airplane->attachChild(support_2);
 	support_2->setPosition(-50, 100);
 
-	SpikePowerup* spike_1 = new SpikePowerup("spike_1");
+	/*SpikePowerup* spike_1 = new SpikePowerup("spike_1");
 	airplane->attachChild(spike_1);
 	spike_1->setPosition(-30, 0);
 
 	SpikePowerup* spike_2 = new SpikePowerup("spike_2");
 	airplane->attachChild(spike_2);
-	spike_2->setPosition(70, 0);
+	spike_2->setPosition(70, 0);*/
 
 	this->registerObject(airplane);
 

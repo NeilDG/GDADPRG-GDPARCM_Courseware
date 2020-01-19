@@ -6,6 +6,9 @@
 #include "PlayerInputController.h"
 #include "PlayerMovement.h"
 
+string AirplanePlayer::AIRPLANE_NAME = "AirPlane";
+string AirplanePlayer::PLAYER_INPUT_COMPONENT = "PlayerInput";
+
 AirplanePlayer::AirplanePlayer(string name) : AGameObject(name) {
 
 }
@@ -25,7 +28,7 @@ void AirplanePlayer::initialize() {
 	this->sprite->setOrigin(textureSize.x / 2, textureSize.y / 2);
 	this->setPosition(BaseRunner::WINDOW_WIDTH / 2, BaseRunner::WINDOW_HEIGHT / 2);
 
-	PlayerInputController* inputController = new PlayerInputController("MyPlayerInput");
+	PlayerInputController* inputController = new PlayerInputController(AirplanePlayer::PLAYER_INPUT_COMPONENT);
 	this->attachComponent(inputController);
 
 	PlayerMovement* movement = new PlayerMovement("MyMovement");
