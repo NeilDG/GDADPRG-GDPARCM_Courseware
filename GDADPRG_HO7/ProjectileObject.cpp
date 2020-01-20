@@ -4,8 +4,10 @@
 #include "ProjectileHandler.h"
 #include "AirplanePlayer.h"
 #include "GameObjectManager.h"
+#include <string>
+#include "ObjectPoolHolder.h"
 
-ProjectileObject::ProjectileObject(string name): APoolable(name)
+ProjectileObject::ProjectileObject(string name): APoolable(name), Collision(this)
 {
 }
 
@@ -33,6 +35,7 @@ void ProjectileObject::initialize()
 
 void ProjectileObject::onRelease()
 {
+	PhysicsManager::getInstance()->untrackObject(this);
 }
 
 void ProjectileObject::onActivate()
@@ -43,10 +46,26 @@ void ProjectileObject::onActivate()
 	this->setPosition(position.x, position.y);
 
 	this->projectileMovement->reset();
+
+	PhysicsManager::getInstance()->trackObject(this);
 }
 
 APoolable* ProjectileObject::clone()
 {
 	APoolable* copyObj = new ProjectileObject(this->name);
 	return copyObj;
+}
+
+void ProjectileObject::onCollisionEnter(AGameObject* contact)
+{
+	if (contact->getName().find("enemy") != std::string::npos) {
+		//std:cout << "Collided with " << contact->getName() << "\n";
+		GameObjectPool* projectilePool = ObjectPoolHolder::getInstance()->getPool(ObjectPoolHolder::PROJECT_POOL_TAG);
+		projectilePool->releasePoolable((APoolable*)this);
+	}
+}
+
+void ProjectileObject::onCollisionExit(AGameObject* contact)
+{
+
 }

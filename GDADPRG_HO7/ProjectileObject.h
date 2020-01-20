@@ -2,7 +2,9 @@
 #include "AGameObject.h"
 #include "APoolable.h"
 #include "ProjectileMovement.h"
-class ProjectileObject :	public APoolable
+#include "PhysicsManager.h"
+
+class ProjectileObject :	public APoolable, public Collision
 {
 	public:
 		ProjectileObject(string name);
@@ -11,6 +13,9 @@ class ProjectileObject :	public APoolable
 		void onRelease();
 		void onActivate();
 		APoolable* clone();
+
+		void onCollisionEnter(AGameObject* contact);
+		void onCollisionExit(AGameObject* contact);
 
 	private:
 		ProjectileMovement* projectileMovement;

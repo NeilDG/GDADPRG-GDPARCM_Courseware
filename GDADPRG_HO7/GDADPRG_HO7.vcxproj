@@ -38,6 +38,7 @@
     <ClCompile Include="HUDScreen.cpp" />
     <ClCompile Include="MainMenuScene.cpp" />
     <ClCompile Include="ObjectPoolHolder.cpp" />
+    <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="PlayerInputController.cpp" />
     <ClCompile Include="PlayerMovement.cpp" />
     <ClCompile Include="ProjectileHandler.cpp" />
@@ -80,6 +81,7 @@
     <ClInclude Include="HUDScreen.h" />
     <ClInclude Include="MainMenuScene.h" />
     <ClInclude Include="ObjectPoolHolder.h" />
+    <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="PlayerInputController.h" />
     <ClInclude Include="PlayerMovement.h" />
     <ClInclude Include="ProjectileHandler.h" />

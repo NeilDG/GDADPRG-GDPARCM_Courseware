@@ -11,6 +11,7 @@
 #include "HUDScreen.h"
 #include "ProjectileObject.h"
 #include "ProjectileHandler.h"
+#include "PhysicsManager.h"
 
 GameScene::GameScene():AScene("GameScene")
 {
@@ -57,10 +58,13 @@ void GameScene::onLoadObjects()
 
 	//create N enemies via object pooling
 	srand(time(NULL));
-	EmptyGameObject* enemiesManager = new EmptyGameObject("EnemiesManager");
+	EmptyGameObject* managerHolder = new EmptyGameObject("EnemiesManager");
 	EnemySwarmHandler* swarmHandler = new EnemySwarmHandler(10, "SwarmHandler");
-	enemiesManager->attachComponent(swarmHandler);
-	this->registerObject(enemiesManager);
+	managerHolder->attachComponent(swarmHandler);
+	this->registerObject(managerHolder);
+
+	//create physics manager
+	PhysicsManager::initialize("PhysicsManager", managerHolder);
 
 	HUDScreen* hudScreen = new HUDScreen("HUDScreen");
 	this->registerObject(hudScreen);

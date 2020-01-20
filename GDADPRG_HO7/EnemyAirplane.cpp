@@ -3,8 +3,9 @@
 #include "BaseRunner.h"
 #include "EnemyBehavior.h"
 #include <iostream>
+#include "ObjectPoolHolder.h"
 
-EnemyAirplane::EnemyAirplane(string name): APoolable(name)
+EnemyAirplane::EnemyAirplane(string name): APoolable(name), Collision(this)
 {
 	
 }
@@ -34,7 +35,7 @@ void EnemyAirplane::initialize()
 
 void EnemyAirplane::onRelease()
 {
-	
+	PhysicsManager::getInstance()->untrackObject(this);
 }
 
 void EnemyAirplane::onActivate()
@@ -45,10 +46,26 @@ void EnemyAirplane::onActivate()
 	this->setPosition(BaseRunner::WINDOW_WIDTH / 2, -30);
 	//randomize
 	this->sprite->move(rand() % 300 - rand() % 300, 0);
+
+	PhysicsManager::getInstance()->trackObject(this);
 }
 
 APoolable* EnemyAirplane::clone()
 {
 	APoolable* copyObj = new EnemyAirplane(this->name);
 	return copyObj;
+}
+
+void EnemyAirplane::onCollisionEnter(AGameObject* contact)
+{
+	if (contact->getName().find("projectile") != std::string::npos) {
+		//std:cout << "Collided with " << contact->getName() << "\n";
+		GameObjectPool* enemyPool = ObjectPoolHolder::getInstance()->getPool(ObjectPoolHolder::ENEMY_POOL_TAG);
+		enemyPool->releasePoolable((APoolable*)this);
+	}
+}
+
+void EnemyAirplane::onCollisionExit(AGameObject* contact)
+{
+	
 }

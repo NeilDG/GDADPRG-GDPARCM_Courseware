@@ -1,6 +1,7 @@
 #pragma once
 #include "APoolable.h"
-class EnemyAirplane :	public APoolable
+#include "PhysicsManager.h"
+class EnemyAirplane :	public APoolable, public Collision
 {
 	public:
 		EnemyAirplane(string name);
@@ -9,6 +10,9 @@ class EnemyAirplane :	public APoolable
 		void onRelease();
 		void onActivate();
 		APoolable* clone();
+
+		void onCollisionEnter(AGameObject* contact);
+		void onCollisionExit(AGameObject* contact);
 
 	private:
 		int counter = 0;
