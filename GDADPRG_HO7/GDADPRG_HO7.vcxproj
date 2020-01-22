@@ -49,6 +49,7 @@
     <ClCompile Include="SamplePopupScreen.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SpikePowerup.cpp" />
+    <ClCompile Include="UIData.cpp" />
     <ClCompile Include="UIText.cpp" />
     <ClCompile Include="AView.cpp" />
     <ClCompile Include="BaseRunner.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="SamplePopupScreen.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SpikePowerup.h" />
+    <ClInclude Include="UIData.h" />
     <ClInclude Include="UIText.h" />
     <ClInclude Include="AView.h" />
     <ClInclude Include="BaseRunner.h" />
