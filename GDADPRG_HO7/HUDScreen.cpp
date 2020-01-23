@@ -5,6 +5,9 @@
 #include "UIText.h"
 #include "QuitScreen.h"
 #include "GameObjectManager.h"
+#include "UIManager.h"
+
+const string HUDScreen::SCORE_TEXT_KEY = "score_1";
 
 HUDScreen::HUDScreen(string name): AView(name), ButtonListener()
 {
@@ -13,6 +16,7 @@ HUDScreen::HUDScreen(string name): AView(name), ButtonListener()
 
 HUDScreen::~HUDScreen()
 {
+	UIManager::getInstance()->removeData(SCORE_TEXT_KEY);
 	AView::~AView();
 }
 
@@ -40,6 +44,16 @@ void HUDScreen::initialize()
 	button_1Text->setSize(18);
 	button_1Text->setText("QUIT");
 
+	UIText* scoreText = new UIText(HUDScreen::SCORE_TEXT_KEY);
+	this->attachChild(scoreText);
+	scoreText->setPosition(textureSize.x - 200, textureSize.y - 35);
+	scoreText->setSize(20);
+	scoreText->setText("SCORE: 100000");
+
+	UIData* scoreData = UIManager::getInstance()->storeData(scoreText->getName());
+	scoreData->bindUIText(scoreText);
+	scoreData->putInt(UIManager::SCORE_UI_KEY, 0); //default score
+	scoreData->refreshTextFromData(scoreText->getName(), UIManager::SCORE_UI_KEY, "SCORE: ");
 }
 
 void HUDScreen::onButtonClick(UIButton* button)

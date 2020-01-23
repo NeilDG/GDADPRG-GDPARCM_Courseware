@@ -6,6 +6,8 @@
 #include "GameObjectManager.h"
 #include <string>
 #include "ObjectPoolHolder.h"
+#include "UIManager.h"
+#include "HUDScreen.h"
 
 ProjectileObject::ProjectileObject(string name): APoolable(name), Collision(this)
 {
@@ -46,6 +48,7 @@ void ProjectileObject::onActivate()
 	this->setPosition(position.x, position.y);
 
 	this->projectileMovement->reset();
+	this->hasHit = false;
 
 	PhysicsManager::getInstance()->trackObject(this);
 }
@@ -58,10 +61,15 @@ APoolable* ProjectileObject::clone()
 
 void ProjectileObject::onCollisionEnter(AGameObject* contact)
 {
-	if (contact->getName().find("enemy") != std::string::npos) {
+	if (contact->getName().find("enemy") != std::string::npos && !this->hasHit) {
 		//std:cout << "Collided with " << contact->getName() << "\n";
+		this->hasHit = true;
 		GameObjectPool* projectilePool = ObjectPoolHolder::getInstance()->getPool(ObjectPoolHolder::PROJECT_POOL_TAG);
 		projectilePool->releasePoolable((APoolable*)this);
+
+		UIData* scoreData = UIManager::getInstance()->getUIData(HUDScreen::SCORE_TEXT_KEY);
+		scoreData->putInt(UIManager::SCORE_UI_KEY, scoreData->getInt(UIManager::SCORE_UI_KEY, 0) + 100);
+		scoreData->refreshTextFromData(HUDScreen::SCORE_TEXT_KEY, UIManager::SCORE_UI_KEY, "SCORE: ");
 	}
 }
 

@@ -35,7 +35,15 @@ GameObjectPool::~GameObjectPool()
 //initializes the object pool
 void GameObjectPool::initialize()
 {
-	for (int i = 0; i < this->maxPoolSize; i++) {
+	//make object copy part of pool
+	if (this->parent != NULL) {
+		this->parent->attachChild(this->objectCopy);
+	}
+	else {
+		GameObjectManager::getInstance()->addObject(this->objectCopy);
+	}
+
+	for (int i = 0; i < this->maxPoolSize - 1; i++) {
 		APoolable* poolableObject = this->objectCopy->clone();
 		//instantiate object but disable it.
 		if (this->parent != NULL) {

@@ -19,6 +19,7 @@ class ProjectileObject :	public APoolable, public Collision
 
 	private:
 		ProjectileMovement* projectileMovement;
+		bool hasHit = false;
 
 };
 

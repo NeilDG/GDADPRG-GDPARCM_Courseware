@@ -21,7 +21,8 @@ class UIText : public AGameObject
 		sf::Vector2f getScale();
 		string getText();
 
-	protected:
+	private:
 		sf::Text* text = NULL;
+
 };
 

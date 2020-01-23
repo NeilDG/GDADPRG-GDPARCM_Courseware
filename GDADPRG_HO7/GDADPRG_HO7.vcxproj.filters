@@ -150,6 +150,9 @@
     <ClCompile Include="UIData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h">
@@ -273,6 +276,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UIData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

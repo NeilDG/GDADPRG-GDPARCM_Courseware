@@ -5,6 +5,8 @@
 class HUDScreen :	public AView, public ButtonListener
 {
 	public:
+		static const string SCORE_TEXT_KEY;
+
 		HUDScreen(string name);
 		~HUDScreen();
 
