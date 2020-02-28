@@ -4,6 +4,6 @@ int main() {
 	Introduction::Game game;
 	game.run();
 
-	HO2::BaseRunner runner;
-	runner.run();
+	//HO2::BaseRunner runner;
+	//runner.run();
 }
