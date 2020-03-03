@@ -159,6 +159,8 @@
     <ClCompile Include="SpikePowerup.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="ZoomingComponent.cpp" />
+    <ClCompile Include="ZoomingPlane.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AComponent.h" />
@@ -177,6 +179,8 @@
     <ClInclude Include="SpikePowerup.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="ZoomingComponent.h" />
+    <ClInclude Include="ZoomingPlane.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

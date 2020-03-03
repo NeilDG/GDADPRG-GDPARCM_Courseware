@@ -6,6 +6,8 @@
 #include "BGObject.h"
 #include "AirplaneSupport.h"
 #include "SpikePowerup.h"
+#include "ZoomingPlane.h"
+#include "AirplaneSupportMovement.h"
 
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
@@ -39,6 +41,16 @@ BaseRunner::BaseRunner() :
 
 	GameObjectManager::getInstance()->addObject(airplane);
 
+	for (int i = 0; i < 15; i++) {
+		ZoomingPlane* zoomingPlane = new ZoomingPlane("zoom_plane_" + to_string(i));
+		GameObjectManager::getInstance()->addObject(zoomingPlane);
+		zoomingPlane->setDelay(i);
+
+		if (rand() % 100 < 40) {
+			AirplaneSupportMovement* logicComponent = new AirplaneSupportMovement("AirplaneSupportMovement_1");
+			zoomingPlane->attachComponent(logicComponent);
+		}
+	}
 }
 
 void BaseRunner::run() {

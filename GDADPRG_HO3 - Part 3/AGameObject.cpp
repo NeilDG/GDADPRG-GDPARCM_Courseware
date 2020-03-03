@@ -156,7 +156,8 @@ AGameObject::ComponentList AGameObject::getComponentsRecursiveProper(AGameObject
 void AGameObject::draw(sf::RenderWindow* targetWindow, sf::RenderStates renderStates) {
 	//apply drawing with parent-child relationship
 	targetWindow->draw(*this->sprite, renderStates); //draw the object first
-	renderStates.transform = this->sprite->getTransform() * renderStates.transform; //apply the transform to its children
+	//renderStates.transform = this->sprite->getTransform() * renderStates.transform; //apply the transform to its children
+	renderStates.transform = renderStates.transform * this->sprite->getTransform();
 	//std::cout << "Drawing " + this->getName() + "\n";
 
 	//draw its children
