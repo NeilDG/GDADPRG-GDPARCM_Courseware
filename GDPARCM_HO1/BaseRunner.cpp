@@ -3,6 +3,8 @@
 #include "AirplanePlayer.h"
 #include "BGObject.h"
 #include "TextureManager.h"
+#include "HelloWorldThread.h"
+
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
 BaseRunner::BaseRunner() :
@@ -13,7 +15,17 @@ BaseRunner::BaseRunner() :
 
 	BGObject* bgObject = new BGObject("BGObject");
 	GameObjectManager::getInstance()->addObject(bgObject);
-	
+
+	AirplanePlayer* airplane = new AirplanePlayer("AirPlane");
+	GameObjectManager::getInstance()->addObject(airplane);
+
+	std::vector<HelloWorldThread*> threadList;
+	for(int i = 0; i < 20; i++)
+	{
+		HelloWorldThread* thread = new HelloWorldThread(i);
+		threadList.push_back(thread);
+		threadList[i]->start();
+	}
 }
 
 void BaseRunner::run() {
