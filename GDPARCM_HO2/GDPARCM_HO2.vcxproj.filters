@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="BaseRunner.cpp" />
-    <ClCompile Include="BGObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -14,11 +12,21 @@
       <Filter>Threading</Filter>
     </ClCompile>
     <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="TextureDisplay.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="AGameObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BGObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="IconObject.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h" />
-    <ClInclude Include="AGameObject.h" />
-    <ClInclude Include="BGObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="IETThread.h">
@@ -28,6 +36,18 @@
       <Filter>Threading</Filter>
     </ClInclude>
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="TextureDisplay.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AGameObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BGObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="IconObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Threading">
@@ -35,6 +55,9 @@
     </Filter>
     <Filter Include="Assets">
       <UniqueIdentifier>{40cd7e57-ccfd-4999-8396-fbbdeaa581ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObjects">
+      <UniqueIdentifier>{fd3959aa-8344-4486-b3e7-1fd1babcdb0b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

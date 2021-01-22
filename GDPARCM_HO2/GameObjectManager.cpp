@@ -13,7 +13,7 @@ GameObjectManager* GameObjectManager::getInstance() {
 	return sharedInstance;
 }
 
-AGameObject* GameObjectManager::findObjectByName(string name)
+AGameObject* GameObjectManager::findObjectByName(AGameObject::String name)
 {
 	if (this->gameObjectMap[name] != NULL) {
 		return this->gameObjectMap[name];
@@ -83,7 +83,7 @@ void GameObjectManager::deleteObject(AGameObject* gameObject)
 	delete gameObject;
 }
 
-void GameObjectManager::deleteObjectByName(string name) {
+void GameObjectManager::deleteObjectByName(AGameObject::String name) {
 	AGameObject* object = this->findObjectByName(name);
 	
 	if (object != NULL) {

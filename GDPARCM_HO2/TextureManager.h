@@ -17,8 +17,8 @@ public:
 	sf::Texture* getFromTextureMap(const String assetName, int frameIndex);
 	int getNumFrames(const String assetName);
 
-	sf::Texture* getTextureFromList(const int index);
-	int getNumLoadedTextures() const;
+	sf::Texture* getStreamTextureFromList(const int index);
+	int getNumLoadedStreamTextures() const;
 
 private:
 	TextureManager();
@@ -27,12 +27,13 @@ private:
 	static TextureManager* sharedInstance;
 
 	HashTable textureMap;
-	TextureList allTextureList;
+	TextureList baseTextureList;
+	TextureList streamTextureList;
 
 	const std::string STREAMING_PATH = "Media/Streaming/";
 	int streamingAssetCount = 0;
 
 	void countStreamingAssets();
-	void instantiateAsTexture(String path, String assetName);
+	void instantiateAsTexture(String path, String assetName, bool isStreaming);
 
 };

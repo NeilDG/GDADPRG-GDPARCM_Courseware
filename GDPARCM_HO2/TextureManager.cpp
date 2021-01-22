@@ -32,7 +32,7 @@ void TextureManager::loadFromAssetList()
 	{
 		std::vector<String> tokens = StringUtils::split(path, '/');
 		String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
-		this->instantiateAsTexture(path, assetName);
+		this->instantiateAsTexture(path, assetName, false);
 		std::cout << "[TextureManager] Loaded texture: " << assetName << std::endl;
 	}
 }
@@ -46,7 +46,7 @@ void TextureManager::loadStreamingAssets()
 		String path = entry.path().generic_string();
 		std::vector<String> tokens = StringUtils::split(path, '/');
 		String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];	
-		this->instantiateAsTexture(path, assetName);
+		this->instantiateAsTexture(path, assetName, true);
 		
 		std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
 	}
@@ -65,7 +65,7 @@ void TextureManager::loadSingleStreamAsset(int index)
 			String path = entry.path().generic_string();
 			std::vector<String> tokens = StringUtils::split(path, '/');
 			String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
-			this->instantiateAsTexture(path, assetName);
+			this->instantiateAsTexture(path, assetName, true);
 
 			std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
 			break;
@@ -97,14 +97,14 @@ int TextureManager::getNumFrames(const String assetName)
 	}
 }
 
-sf::Texture* TextureManager::getTextureFromList(const int index)
+sf::Texture* TextureManager::getStreamTextureFromList(const int index)
 {
-	return this->allTextureList[index];
+	return this->streamTextureList[index];
 }
 
-int TextureManager::getNumLoadedTextures() const
+int TextureManager::getNumLoadedStreamTextures() const
 {
-	return this->allTextureList.size();
+	return this->streamTextureList.size();
 }
 
 void TextureManager::countStreamingAssets()
@@ -116,10 +116,19 @@ void TextureManager::countStreamingAssets()
 	std::cout << "[TextureManager] Number of streaming assets: " << this->streamingAssetCount << std::endl;
 }
 
-void TextureManager::instantiateAsTexture(String path, String assetName)
+void TextureManager::instantiateAsTexture(String path, String assetName, bool isStreaming)
 {
 	sf::Texture* texture = new sf::Texture();
 	texture->loadFromFile(path);
 	this->textureMap[assetName].push_back(texture);
-	this->allTextureList.push_back(texture);
+
+	if(isStreaming)
+	{
+		this->streamTextureList.push_back(texture);
+	}
+	else
+	{
+		this->baseTextureList.push_back(texture);
+	}
+	
 }

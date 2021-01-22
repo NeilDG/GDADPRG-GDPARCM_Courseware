@@ -148,9 +148,11 @@
     <ClCompile Include="BGObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="HelloWorldThread.cpp" />
+    <ClCompile Include="IconObject.cpp" />
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="TextureDisplay.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,8 +161,10 @@
     <ClInclude Include="BGObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="HelloWorldThread.h" />
+    <ClInclude Include="IconObject.h" />
     <ClInclude Include="IETThread.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="TextureDisplay.h" />
     <ClInclude Include="TextureManager.h" />
   </ItemGroup>
   <ItemGroup>
