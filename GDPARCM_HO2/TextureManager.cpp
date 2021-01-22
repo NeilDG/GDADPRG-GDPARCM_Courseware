@@ -26,18 +26,13 @@ void TextureManager::loadFromAssetList()
 {
 	std::cout << "[TextureManager] Reading from asset list" << std::endl;
 	std::ifstream stream("Media/assets.txt");
-	String line;
+	String path;
 
-	while(std::getline(stream, line))
+	while(std::getline(stream, path))
 	{
-		std::vector<String> tokens = StringUtils::split(line, '/');
+		std::vector<String> tokens = StringUtils::split(path, '/');
 		String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
-
-		sf::Texture* texture = new sf::Texture();
-		texture->loadFromFile(line);
-		texture->setRepeated(true);
-		this->textureMap[assetName].push_back(texture);
-		this->allTextureList.push_back(texture);
+		this->instantiateAsTexture(path, assetName);
 		std::cout << "[TextureManager] Loaded texture: " << assetName << std::endl;
 	}
 }
@@ -50,14 +45,33 @@ void TextureManager::loadStreamingAssets()
 
 		String path = entry.path().generic_string();
 		std::vector<String> tokens = StringUtils::split(path, '/');
-		String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
-		
-		sf::Texture* texture = new sf::Texture();
-		texture->loadFromFile(path);
-		this->textureMap[assetName].push_back(texture);
-		this->allTextureList.push_back(texture);
+		String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];	
+		this->instantiateAsTexture(path, assetName);
 		
 		std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
+	}
+}
+
+void TextureManager::loadSingleStreamAsset(int index)
+{
+	int fileNum = 0;
+	
+	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
+		if(index == fileNum)
+		{
+			//simulate loading of very large file
+			IETThread::sleep(200);
+			
+			String path = entry.path().generic_string();
+			std::vector<String> tokens = StringUtils::split(path, '/');
+			String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
+			this->instantiateAsTexture(path, assetName);
+
+			std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
+			break;
+		}
+
+		fileNum++;
 	}
 }
 
@@ -100,4 +114,12 @@ void TextureManager::countStreamingAssets()
 		this->streamingAssetCount++;
 	}
 	std::cout << "[TextureManager] Number of streaming assets: " << this->streamingAssetCount << std::endl;
+}
+
+void TextureManager::instantiateAsTexture(String path, String assetName)
+{
+	sf::Texture* texture = new sf::Texture();
+	texture->loadFromFile(path);
+	this->textureMap[assetName].push_back(texture);
+	this->allTextureList.push_back(texture);
 }

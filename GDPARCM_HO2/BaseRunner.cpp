@@ -58,11 +58,16 @@ void BaseRunner::update(sf::Time elapsedTime) {
 
 	GameObjectManager::getInstance()->update(elapsedTime);
 
-	if(!this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
+	if(this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
 	{
 		this->startedStreaming = true;
 		this->ticks = 0.0f;
 		TextureManager::getInstance()->loadStreamingAssets();
+	}
+	else if(this->streamingType == StreamingType::SINGLE_STREAM && this->ticks > this->STREAMING_LOAD_DELAY)
+	{
+		this->ticks = 0.0f;
+		TextureManager::getInstance()->loadSingleStreamAsset(TextureManager::getInstance()->getNumLoadedTextures());
 	}
 }
 

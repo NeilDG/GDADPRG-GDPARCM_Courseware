@@ -165,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Media\assets.txt" />
-    <Text Include="Media\streaming_assets.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

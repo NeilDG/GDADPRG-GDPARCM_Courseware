@@ -1,6 +1,0 @@
-Media/Textures/Eagle.png
-Media/Textures/Raptor.png
-Media/Textures/tile000.png
-Media/Textures/tile001.png
-Media/Textures/tile002.png
-Media/Textures/tile003.png

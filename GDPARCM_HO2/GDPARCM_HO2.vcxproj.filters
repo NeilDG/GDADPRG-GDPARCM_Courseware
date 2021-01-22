@@ -41,8 +41,5 @@
     <Text Include="Media\assets.txt">
       <Filter>Assets</Filter>
     </Text>
-    <Text Include="Media\streaming_assets.txt">
-      <Filter>Assets</Filter>
-    </Text>
   </ItemGroup>
 </Project>
