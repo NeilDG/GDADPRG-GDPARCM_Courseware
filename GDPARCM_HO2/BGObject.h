@@ -3,7 +3,7 @@
 class BGObject : public AGameObject
 {
 	public: 
-		BGObject(string name);
+		BGObject(String name);
 		void initialize();
 		void processInput(sf::Event event);
 		void update(sf::Time deltaTime);

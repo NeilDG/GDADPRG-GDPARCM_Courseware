@@ -6,17 +6,13 @@ class BaseRunner : private sf::NonCopyable
 {
 public:
 	static const sf::Time	TIME_PER_FRAME;
-	static const int WINDOW_WIDTH = 1024;
-	static const int WINDOW_HEIGHT = 768;
+	static const int WINDOW_WIDTH = 1920;
+	static const int WINDOW_HEIGHT = 1080;
 
 	BaseRunner();
 	void run();
 
 private:
-
-	const float STREAMING_LOAD_DELAY = 3000.0f;
-	float ticks = 0.0f;
-	bool startedStreaming = false;
 	
 	sf::RenderWindow		window;
 

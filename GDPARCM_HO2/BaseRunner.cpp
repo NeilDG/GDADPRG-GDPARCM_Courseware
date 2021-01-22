@@ -3,6 +3,7 @@
 #include "BGObject.h"
 #include "TextureManager.h"
 #include "HelloWorldThread.h"
+#include "TextureDisplay.h"
 
 /// <summary>
 /// This demonstrates a running parallax background where after X seconds, a batch of assets will be streamed and loaded.
@@ -12,11 +13,15 @@ const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 BaseRunner::BaseRunner() :
 	window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "HO: Entity Component", sf::Style::Close) {
 
-	//load textures
+	//load initial textures
 	TextureManager::getInstance()->loadFromAssetList();
 
+	//load objects
 	BGObject* bgObject = new BGObject("BGObject");
 	GameObjectManager::getInstance()->addObject(bgObject);
+
+	TextureDisplay* display = new TextureDisplay();
+	GameObjectManager::getInstance()->addObject(display);
 }
 
 void BaseRunner::run() {
@@ -54,16 +59,7 @@ void BaseRunner::processEvents()
 }
 
 void BaseRunner::update(sf::Time elapsedTime) {
-	this->ticks += elapsedTime.asMilliseconds();
-
 	GameObjectManager::getInstance()->update(elapsedTime);
-
-	if(!this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
-	{
-		this->startedStreaming = true;
-		this->ticks = 0.0f;
-		TextureManager::getInstance()->loadStreamingAssets();
-	}
 }
 
 void BaseRunner::render() {

@@ -15,7 +15,7 @@ class GameObjectManager
 {
 	public:
 		static GameObjectManager* getInstance();
-		AGameObject* findObjectByName(string name);
+		AGameObject* findObjectByName(AGameObject::String name);
 		List getAllObjects();
 		int activeObjects();
 		void processInput(sf::Event event);
@@ -23,7 +23,7 @@ class GameObjectManager
 		void draw(sf::RenderWindow* window);
 		void addObject(AGameObject* gameObject);
 		void deleteObject(AGameObject* gameObject);
-		void deleteObjectByName(string name);
+		void deleteObjectByName(AGameObject::String name);
 
 	private:
 		GameObjectManager() {};
