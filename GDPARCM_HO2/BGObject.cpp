@@ -13,7 +13,7 @@ void BGObject::initialize()
 
 	//assign texture
 	this->sprite = new sf::Sprite();
-	this->sprite->setTexture(*TextureManager::getInstance()->getTextureAt("Desert", 0));
+	this->sprite->setTexture(*TextureManager::getInstance()->getFromTextureMap("Desert", 0));
 	sf::Vector2u textureSize = this->sprite->getTexture()->getSize();
 	//make BG height x k to emulate repeating BG.
 	this->sprite->setTextureRect(sf::IntRect(0,0,BaseRunner::WINDOW_WIDTH, BaseRunner::WINDOW_HEIGHT * 8)); 

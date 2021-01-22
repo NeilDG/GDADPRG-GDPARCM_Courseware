@@ -13,9 +13,11 @@ public:
 	void run();
 
 private:
-	
-	sf::Time ticks;
 
+	const float STREAMING_LOAD_DELAY = 3000.0f;
+	float ticks = 0.0f;
+	bool startedStreaming = false;
+	
 	sf::RenderWindow		window;
 
 	void render();

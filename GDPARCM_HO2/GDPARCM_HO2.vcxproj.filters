@@ -33,8 +33,16 @@
     <Filter Include="Threading">
       <UniqueIdentifier>{573df171-03ec-48a9-aaa5-54e56955da4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Assets">
+      <UniqueIdentifier>{40cd7e57-ccfd-4999-8396-fbbdeaa581ac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Media\assets.txt" />
+    <Text Include="Media\assets.txt">
+      <Filter>Assets</Filter>
+    </Text>
+    <Text Include="Media\streaming_assets.txt">
+      <Filter>Assets</Filter>
+    </Text>
   </ItemGroup>
 </Project>
