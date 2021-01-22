@@ -1,0 +1,3 @@
+Media/Textures/Desert.png
+Media/Textures/Eagle.png
+Media/Textures/Raptor.png
