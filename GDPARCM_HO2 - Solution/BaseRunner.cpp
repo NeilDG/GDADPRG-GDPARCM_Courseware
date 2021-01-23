@@ -7,6 +7,7 @@
 
 /// <summary>
 /// This demonstrates a running parallax background where after X seconds, a batch of assets will be streamed and loaded.
+/// For single streaming, N workers are spawned for loading the assets.
 /// </summary>
 const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
