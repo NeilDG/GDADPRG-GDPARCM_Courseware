@@ -30,6 +30,9 @@
     <ClCompile Include="StreamAssetLoader.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
+    <ClCompile Include="FPSCounter.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h" />
@@ -59,6 +62,9 @@
     </ClInclude>
     <ClInclude Include="StreamAssetLoader.h">
       <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCounter.h">
+      <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

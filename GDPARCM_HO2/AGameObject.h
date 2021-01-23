@@ -11,7 +11,7 @@ class AGameObject: sf::NonCopyable
 		virtual void initialize() = 0;
 		virtual void processInput(sf::Event event) = 0;
 		virtual void update(sf::Time deltaTime) = 0;
-		void draw(sf::RenderWindow* targetWindow);
+		virtual void draw(sf::RenderWindow* targetWindow);
 		String getName();
 
 		virtual void setPosition(float x, float y);

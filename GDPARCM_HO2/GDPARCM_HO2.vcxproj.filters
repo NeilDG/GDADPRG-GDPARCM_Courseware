@@ -24,6 +24,9 @@
     <ClCompile Include="IconObject.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="FPSCounter.cpp">
+      <Filter>GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h" />
@@ -46,6 +49,9 @@
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="IconObject.h">
+      <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCounter.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
   </ItemGroup>

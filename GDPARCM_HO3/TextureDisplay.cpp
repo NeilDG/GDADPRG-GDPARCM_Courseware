@@ -21,7 +21,7 @@ void TextureDisplay::processInput(sf::Event event)
 
 void TextureDisplay::update(sf::Time deltaTime)
 {
-	this->ticks += deltaTime.asMilliseconds();
+	this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
 	if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
 	{
 		this->startedStreaming = true;
@@ -43,6 +43,8 @@ void TextureDisplay::onFinishedExecution()
 
 void TextureDisplay::spawnObject()
 {
+	this->guard.lock();
+	
 	String objectName = "Icon_" + to_string(this->iconList.size());
 	IconObject* iconObj = new IconObject(objectName, this->iconList.size());
 	this->iconList.push_back(iconObj);
@@ -62,4 +64,6 @@ void TextureDisplay::spawnObject()
 		this->rowGrid++;
 	}
 	GameObjectManager::getInstance()->addObject(iconObj);
+
+	this->guard.unlock();
 }

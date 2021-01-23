@@ -13,9 +13,8 @@ public:
 	void run();
 
 private:
-	
 	sf::RenderWindow		window;
-
+	
 	void render();
 	void processEvents();
 	void update(sf::Time elapsedTime);

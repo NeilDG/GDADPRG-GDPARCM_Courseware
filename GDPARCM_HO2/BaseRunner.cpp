@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "HelloWorldThread.h"
 #include "TextureDisplay.h"
+#include "FPSCounter.h"
 
 /// <summary>
 /// This demonstrates a running parallax background where after X seconds, a batch of assets will be streamed and loaded.
@@ -12,7 +13,6 @@ const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / 60.f);
 
 BaseRunner::BaseRunner() :
 	window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "HO: Entity Component", sf::Style::Close) {
-
 	//load initial textures
 	TextureManager::getInstance()->loadFromAssetList();
 
@@ -22,6 +22,9 @@ BaseRunner::BaseRunner() :
 
 	TextureDisplay* display = new TextureDisplay();
 	GameObjectManager::getInstance()->addObject(display);
+
+	FPSCounter* fpsCounter = new FPSCounter();
+	GameObjectManager::getInstance()->addObject(fpsCounter);
 }
 
 void BaseRunner::run() {
@@ -36,7 +39,8 @@ void BaseRunner::run() {
 			timeSinceLastUpdate -= TIME_PER_FRAME;
 
 			processEvents();
-			update(TIME_PER_FRAME);
+			//update(TIME_PER_FRAME);
+			update(elapsedTime);
 		}
 
 		render();
