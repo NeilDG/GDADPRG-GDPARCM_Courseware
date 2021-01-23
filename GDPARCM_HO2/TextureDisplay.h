@@ -25,7 +25,7 @@ private:
 
 	int columnGrid = 0; int rowGrid = 0;
 	
-	const int MAX_COLUMN = 22;
+	const int MAX_COLUMN = 28;
 	const int MAX_ROW = 22;
 
 	void spawnObject();

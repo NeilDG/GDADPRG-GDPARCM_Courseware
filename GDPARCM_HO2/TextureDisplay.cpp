@@ -43,7 +43,7 @@ void TextureDisplay::spawnObject()
 	this->iconList.push_back(iconObj);
 
 	//set position
-	int IMG_WIDTH = 100; int IMG_HEIGHT = 100;
+	int IMG_WIDTH = 68; int IMG_HEIGHT = 68;
 	float x = this->columnGrid * IMG_WIDTH;
 	float y = this->rowGrid * IMG_HEIGHT;
 	iconObj->setPosition(x, y);
