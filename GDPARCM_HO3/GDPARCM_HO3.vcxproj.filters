@@ -8,9 +8,6 @@
     <ClCompile Include="IETThread.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
-    <ClCompile Include="HelloWorldThread.cpp">
-      <Filter>Threading</Filter>
-    </ClCompile>
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TextureDisplay.cpp">
       <Filter>GameObjects</Filter>
@@ -33,15 +30,15 @@
     <ClCompile Include="FPSCounter.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
+    <ClCompile Include="HelloWorldThread.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="IETThread.h">
-      <Filter>Threading</Filter>
-    </ClInclude>
-    <ClInclude Include="HelloWorldThread.h">
       <Filter>Threading</Filter>
     </ClInclude>
     <ClInclude Include="StringUtils.h" />
@@ -65,6 +62,9 @@
     </ClInclude>
     <ClInclude Include="FPSCounter.h">
       <Filter>GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="HelloWorldThread.h">
+      <Filter>Threading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
