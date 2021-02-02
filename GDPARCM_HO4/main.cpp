@@ -14,9 +14,9 @@ void runSemaphoreDemo()
 	
 }
 int main() {
-	const int RUNS = 5;
+	const int RUNS = 10;
 	
-	for(int i = 0; i < 5; i++)
+	for(int i = 0; i < RUNS; i++)
 	{
 		std::cout << "Performing run #" << (i + 1) << std::endl;
 

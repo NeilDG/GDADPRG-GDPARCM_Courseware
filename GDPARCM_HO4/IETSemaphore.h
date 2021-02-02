@@ -16,7 +16,6 @@ public:
 
 private:
 	//typedef std::atomic<int> AtomicInt; //declare permits as atomic operation
-
 	typedef std::mutex Mutex;
 	Mutex* guard;
 	int permits = 0;

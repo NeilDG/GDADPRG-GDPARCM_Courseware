@@ -24,12 +24,13 @@ void IETSemaphore::acquire()
 	if(this->permits > 0)
 	{
 		this->permits = this->permits - 1;
+		this->guard->unlock();
 	}
 	else
 	{
+		this->guard->unlock();
 		this->wait();
 	}
-	this->guard->unlock();
 }
 
 void IETSemaphore::release()
