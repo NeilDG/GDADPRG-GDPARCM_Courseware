@@ -148,6 +148,9 @@
     <ClCompile Include="BGObject.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="ConditionClass.cpp" />
+    <ClCompile Include="MonitorSharedBuffer.cpp" />
+    <ClCompile Include="MonitorTransactionThread.cpp" />
     <ClCompile Include="TransactionThread.cpp" />
     <ClCompile Include="IconObject.cpp" />
     <ClCompile Include="IETSemaphore.cpp" />
@@ -166,6 +169,9 @@
     <ClInclude Include="BGObject.h" />
     <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="ConditionClass.h" />
+    <ClInclude Include="MonitorSharedBuffer.h" />
+    <ClInclude Include="MonitorTransactionThread.h" />
     <ClInclude Include="TransactionThread.h" />
     <ClInclude Include="IconObject.h" />
     <ClInclude Include="IETSemaphore.h" />

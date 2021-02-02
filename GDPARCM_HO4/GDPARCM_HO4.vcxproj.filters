@@ -31,12 +31,21 @@
       <Filter>GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="IETSemaphore.cpp">
-      <Filter>Concurrency</Filter>
+      <Filter>SemaphoresDemo</Filter>
     </ClCompile>
-    <ClCompile Include="SharedBuffer.cpp" />
     <ClCompile Include="TransactionThread.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
+    <ClCompile Include="SharedBuffer.cpp">
+      <Filter>SemaphoresDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="ConditionClass.cpp">
+      <Filter>MonitorsDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="MonitorSharedBuffer.cpp">
+      <Filter>MonitorsDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="MonitorTransactionThread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h" />
@@ -68,12 +77,21 @@
       <Filter>GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="IETSemaphore.h">
-      <Filter>Concurrency</Filter>
+      <Filter>SemaphoresDemo</Filter>
     </ClInclude>
-    <ClInclude Include="SharedBuffer.h" />
     <ClInclude Include="TransactionThread.h">
       <Filter>Threading</Filter>
     </ClInclude>
+    <ClInclude Include="SharedBuffer.h">
+      <Filter>SemaphoresDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionClass.h">
+      <Filter>MonitorsDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="MonitorSharedBuffer.h">
+      <Filter>MonitorsDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="MonitorTransactionThread.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Threading">
@@ -85,7 +103,10 @@
     <Filter Include="GameObjects">
       <UniqueIdentifier>{fd3959aa-8344-4486-b3e7-1fd1babcdb0b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Concurrency">
+    <Filter Include="MonitorsDemo">
+      <UniqueIdentifier>{6c7b4b1b-b3da-4dda-b9e5-cb2977c109e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SemaphoresDemo">
       <UniqueIdentifier>{2cfc02f9-78b2-4cf6-800b-3ddfb4298c6f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
