@@ -1,6 +1,6 @@
 #pragma once
+#include "BusyWaitSemaphore.h"
 #include "IETSemaphore.h"
-#include <semaphore>
 
 
 /// <summary>
@@ -14,11 +14,8 @@ public:
 
 	void depositAmount(int amount);
 	void withdrawAmount(int amount);
-private:
-	typedef std::binary_semaphore BinarySemaphore;
-	
+private:	
 	int amount = 0;
 	IETSemaphore* withdrawn;
-	BinarySemaphore* withdrawSem;
 };
 

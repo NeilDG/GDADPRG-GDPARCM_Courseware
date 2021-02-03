@@ -34,8 +34,8 @@ int main() {
 	{
 		std::cout << "Performing run #" << (i + 1) << std::endl;
 
-		//runSemaphoreDemo();
-		runMonitorDemo();
+		runSemaphoreDemo();
+		//runMonitorDemo();
 		IETThread::sleep(2500);
 
 		std::cout << std::endl;

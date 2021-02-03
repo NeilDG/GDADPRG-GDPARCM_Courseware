@@ -1,26 +1,24 @@
 #pragma once
+#include <semaphore>
 #include <mutex>
 
 /// <summary>
-/// Representation of a semaphore class
+/// Representation of a semaphore class using C++ 20 semaphores
 /// </summary>
 class IETSemaphore
 {
 public:
-	IETSemaphore(int available, int limit);
-	IETSemaphore(int limit);
+	IETSemaphore(int available);
 	~IETSemaphore();
 
-	void acquire();
-	void release();
+	void acquire() const;
+	void acquire(int permits) const;
+	void release() const;
+	void release(int permits) const;
 
 private:
-	//typedef std::atomic<int> AtomicInt; //declare permits as atomic operation
-	typedef std::mutex Mutex;
-	Mutex* guard;
-	int permits = 0;
-	int maxPermits = 0;
-	
-	void wait() const; //sleeps the thread and awakes when permits are enough
+	const static int GLOBAL_MAX_PERMIT = 50;
+	typedef std::counting_semaphore<GLOBAL_MAX_PERMIT> Semaphore; //C++ 20 requires permits to be known during compile-time. Global max here is 50.
+	Semaphore* semaphore;
 };
 

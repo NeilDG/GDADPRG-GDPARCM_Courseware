@@ -30,9 +30,6 @@
     <ClCompile Include="FPSCounter.cpp">
       <Filter>GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="IETSemaphore.cpp">
-      <Filter>SemaphoresDemo</Filter>
-    </ClCompile>
     <ClCompile Include="TransactionThread.cpp">
       <Filter>Threading</Filter>
     </ClCompile>
@@ -46,6 +43,15 @@
       <Filter>MonitorsDemo</Filter>
     </ClCompile>
     <ClCompile Include="MonitorTransactionThread.cpp" />
+    <ClCompile Include="BusyWaitSemaphore.cpp">
+      <Filter>SemaphoresDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="Lightswitch.cpp">
+      <Filter>SemaphoresDemo</Filter>
+    </ClCompile>
+    <ClCompile Include="IETSemaphore.cpp">
+      <Filter>SemaphoresDemo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseRunner.h" />
@@ -76,9 +82,6 @@
     <ClInclude Include="FPSCounter.h">
       <Filter>GameObjects</Filter>
     </ClInclude>
-    <ClInclude Include="IETSemaphore.h">
-      <Filter>SemaphoresDemo</Filter>
-    </ClInclude>
     <ClInclude Include="TransactionThread.h">
       <Filter>Threading</Filter>
     </ClInclude>
@@ -92,6 +95,15 @@
       <Filter>MonitorsDemo</Filter>
     </ClInclude>
     <ClInclude Include="MonitorTransactionThread.h" />
+    <ClInclude Include="BusyWaitSemaphore.h">
+      <Filter>SemaphoresDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="Lightswitch.h">
+      <Filter>SemaphoresDemo</Filter>
+    </ClInclude>
+    <ClInclude Include="IETSemaphore.h">
+      <Filter>SemaphoresDemo</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Threading">

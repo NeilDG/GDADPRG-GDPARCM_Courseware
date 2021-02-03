@@ -3,8 +3,7 @@
 SharedBuffer::SharedBuffer()
 {
 	this->amount = 0;
-	this->withdrawn = new IETSemaphore(0, 1);
-	this->withdrawSem = new BinarySemaphore(0);
+	this->withdrawn = new IETSemaphore(0);
 }
 
 SharedBuffer::~SharedBuffer()

@@ -1,53 +1,34 @@
 #include "IETSemaphore.h"
-#include "IETThread.h"
 
-IETSemaphore::IETSemaphore(int available, int limit)
+IETSemaphore::IETSemaphore(int available)
 {
-	this->permits = available;
-	this->maxPermits = limit;
-	this->guard = new Mutex();
-}
-
-IETSemaphore::IETSemaphore(int limit)
-{
-	this->maxPermits = limit;
-	this->permits = this->maxPermits;
+	this->semaphore = new Semaphore(available);
 }
 
 IETSemaphore::~IETSemaphore()
 {
+	delete this->semaphore;
 }
 
-void IETSemaphore::acquire()
+void IETSemaphore::acquire() const
 {
-	this->guard->lock();
-	if(this->permits > 0)
+	this->semaphore->acquire();
+}
+
+void IETSemaphore::acquire(int permits) const
+{
+	for (int i = 0; i < permits; i++)
 	{
-		this->permits = this->permits - 1;
-		this->guard->unlock();
-	}
-	else
-	{
-		this->guard->unlock();
-		this->wait();
+		this->semaphore->acquire();
 	}
 }
 
-void IETSemaphore::release()
+void IETSemaphore::release(int permits) const
 {
-	this->guard->lock();
-	if(this->permits < this->maxPermits)
-	{
-		this->permits = this->permits + 1;
-	}
-	this->guard->unlock();
+	this->semaphore->release(permits);
 }
 
-void IETSemaphore::wait() const
+void IETSemaphore::release() const
 {
-	//no choice but to do busy-waiting.
-	while(this->permits == 0)
-	{
-		IETThread::sleep(1);
-	}
+	this->semaphore->release();
 }
