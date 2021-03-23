@@ -52,7 +52,7 @@ void runSampleAlgo_Shopaholic()
 }
 
 int main() {
-	/*const int RUNS = 10;
+	const int RUNS = 10;
 	
 	for(int i = 0; i < RUNS; i++)
 	{
@@ -63,8 +63,8 @@ int main() {
 		IETThread::sleep(2500);
 
 		std::cout << std::endl;
-	}*/
+	}
 
-	runSampleAlgo_Shopaholic();
+	//runSampleAlgo_Shopaholic();
 	
 }
