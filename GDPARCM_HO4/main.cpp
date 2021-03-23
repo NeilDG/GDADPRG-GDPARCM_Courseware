@@ -4,6 +4,9 @@
 #include <mutex>
 #include "MonitorSharedBuffer.h"
 #include "MonitorTransactionThread.h"
+#include <cstdio>
+#include <algorithm>
+
 void runSemaphoreDemo()
 {
 	SharedBuffer* buffer = new SharedBuffer();
@@ -27,8 +30,29 @@ void runMonitorDemo()
 	withdrawThread->start();
 }
 
+void runSampleAlgo_Shopaholic()
+{
+	int T, N, a[20000];
+
+	scanf_s("%d", &T);
+
+	while (T--) {
+		scanf_s("%d", &N);
+
+		for (int i = 0; i < N; ++i) scanf_s("%d", &a[i]);
+		std::sort(a, a + N);
+
+		int ans = 0;
+
+		for (int i = N - 3; i >= 0; i -= 3)
+			ans += a[i];
+
+		printf("%d\n", ans);
+	}
+}
+
 int main() {
-	const int RUNS = 10;
+	/*const int RUNS = 10;
 	
 	for(int i = 0; i < RUNS; i++)
 	{
@@ -39,6 +63,8 @@ int main() {
 		IETThread::sleep(2500);
 
 		std::cout << std::endl;
-	}
+	}*/
+
+	runSampleAlgo_Shopaholic();
 	
 }
