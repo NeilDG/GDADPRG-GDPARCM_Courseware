@@ -146,6 +146,7 @@
     <ClCompile Include="AGameObject.cpp" />
     <ClCompile Include="BaseRunner.cpp" />
     <ClCompile Include="BGObject.cpp" />
+    <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="HelloWorldThread.cpp" />
     <ClCompile Include="IconObject.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="BaseRunner.h" />
     <ClInclude Include="AGameObject.h" />
     <ClInclude Include="BGObject.h" />
+    <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="HelloWorldThread.h" />
     <ClInclude Include="IconObject.h" />

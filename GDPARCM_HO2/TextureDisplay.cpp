@@ -21,7 +21,8 @@ void TextureDisplay::processInput(sf::Event event)
 
 void TextureDisplay::update(sf::Time deltaTime)
 {
-	this->ticks += deltaTime.asMilliseconds();
+	this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
+	
 	if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
 	{
 		this->startedStreaming = true;
@@ -43,7 +44,7 @@ void TextureDisplay::spawnObject()
 	this->iconList.push_back(iconObj);
 
 	//set position
-	int IMG_WIDTH = 100; int IMG_HEIGHT = 100;
+	int IMG_WIDTH = 68; int IMG_HEIGHT = 68;
 	float x = this->columnGrid * IMG_WIDTH;
 	float y = this->rowGrid * IMG_HEIGHT;
 	iconObj->setPosition(x, y);

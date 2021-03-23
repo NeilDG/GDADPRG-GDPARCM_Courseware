@@ -18,14 +18,14 @@ private:
 	IconList iconList;
 
 	enum StreamingType { BATCH_LOAD = 0, SINGLE_STREAM = 1 };
-	const float STREAMING_LOAD_DELAY = 1500.0f;
+	const float STREAMING_LOAD_DELAY = 2000.0f;
 	const StreamingType streamingType = SINGLE_STREAM;
 	float ticks = 0.0f;
 	bool startedStreaming = false;
 
 	int columnGrid = 0; int rowGrid = 0;
 	
-	const int MAX_COLUMN = 22;
+	const int MAX_COLUMN = 28;
 	const int MAX_ROW = 22;
 
 	void spawnObject();
