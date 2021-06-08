@@ -51,8 +51,6 @@ void BaseRunner::run() {
 		render();
 		
 		previousTime = currentTime;
-		
-		
 	}
 }
 

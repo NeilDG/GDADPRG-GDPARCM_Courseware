@@ -1,6 +1,5 @@
 #pragma once
 #include <semaphore>
-#include <mutex>
 
 /// <summary>
 /// Representation of a semaphore class using C++ 20 semaphores

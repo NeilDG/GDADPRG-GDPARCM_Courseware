@@ -28,8 +28,8 @@ void MonitorSharedBuffer::withdrawAmount(int amount)
 
 void MonitorSharedBuffer::tryWithdraw()
 {
-	while(this->hasDeposited == false) //guarantees mutual exclusion. see implementation.
-	{
+	while(this->hasDeposited == false) {
+		//guarantees mutual exclusion. see implementation.
 		this->conditionA->await();
 	}
 }

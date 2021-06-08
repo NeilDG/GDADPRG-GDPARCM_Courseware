@@ -10,9 +10,6 @@ public:
 private:
 	void run() override;
 
-	void tryEnter();
-	void reportExit();
-
 	MonitorSharedBuffer* sharedBuffer;
 	bool depositor = true;
 	int id = 0;

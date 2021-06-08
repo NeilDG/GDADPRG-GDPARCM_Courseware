@@ -1,5 +1,5 @@
 #pragma once
-#include "BusyWaitSemaphore.h"
+#include "IETSemaphore.h"
 class Lightswitch
 {
 	public:
@@ -10,8 +10,8 @@ class Lightswitch
 		void unlock();
 
 	private:
-		BusyWaitSemaphore* mutex;
-		BusyWaitSemaphore* roomEmpty;
+		IETSemaphore* mutex;
+		IETSemaphore* roomEmpty;
 		int counter = 0;
 };
 

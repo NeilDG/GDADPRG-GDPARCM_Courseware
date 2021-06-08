@@ -6,9 +6,11 @@
 #include "MonitorTransactionThread.h"
 #include <cstdio>
 #include <algorithm>
+#include "Lightswitch.h"
 
 void runSemaphoreDemo()
 {
+	
 	SharedBuffer* buffer = new SharedBuffer();
 
 	TransactionThread* withdrawThread = new TransactionThread(0, buffer, false);
@@ -16,7 +18,6 @@ void runSemaphoreDemo()
 
 	depositThread->start();
 	withdrawThread->start();
-	
 }
 
 void runMonitorDemo()

@@ -35,7 +35,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDPARCM_HO4", "GDPARCM_HO4\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDPARCM_ClassDemo", "GDPARCM_ClassDemo\GDPARCM_ClassDemo.vcxproj", "{ADEA0D3D-E9E0-41D0-A684-C70C6164B973}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDPARCM_HO2", "GDPARCM_HO2 - Class Template\GDPARCM_HO2 - Class Template.vcxproj", "{89135A09-E28E-4DB3-A692-596E4AFC84B4}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDPARCM_HO2 - Class Demo", "GDPARCM_HO2 - Class Template\GDPARCM_HO2 - Class Template.vcxproj", "{89135A09-E28E-4DB3-A692-596E4AFC84B4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDPARCM_HO4 - Class Demo", "GDPARCM_HO4 - Class Demo\GDPARCM_HO4 - Class Demo.vcxproj", "{3FF80961-1559-43C7-83D7-1B400CB40D1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -181,6 +183,14 @@ Global
 		{89135A09-E28E-4DB3-A692-596E4AFC84B4}.Release|x64.Build.0 = Release|x64
 		{89135A09-E28E-4DB3-A692-596E4AFC84B4}.Release|x86.ActiveCfg = Release|Win32
 		{89135A09-E28E-4DB3-A692-596E4AFC84B4}.Release|x86.Build.0 = Release|Win32
+		{3FF80961-1559-43C7-83D7-1B400CB40D1F}.Debug|x64.ActiveCfg = Debug|x64
+		{3FF80961-1559-43C7-83D7-1B400CB40D1F}.Debug|x64.Build.0 = Debug|x64
+		{3FF80961-1559-43C7-83D7-1B400CB40D1F}.Debug|x86.ActiveCfg = Debug|Win32
+		{3FF80961-1559-43C7-83D7-1B400CB40D1F}.Debug|x86.Build.0 = Debug|Win32
+		{3FF80961-1559-43C7-83D7-1B400CB40D1F}.Release|x64.ActiveCfg = Release|x64
+		{3FF80961-1559-43C7-83D7-1B400CB40D1F}.Release|x64.Build.0 = Release|x64
+		{3FF80961-1559-43C7-83D7-1B400CB40D1F}.Release|x86.ActiveCfg = Release|Win32
+		{3FF80961-1559-43C7-83D7-1B400CB40D1F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

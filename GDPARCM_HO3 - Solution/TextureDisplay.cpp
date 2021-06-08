@@ -42,7 +42,8 @@ void TextureDisplay::onFinishedExecution()
 }
 
 void TextureDisplay::spawnObject()
-{	
+{
+	//mu8t
 	String objectName = "Icon_" + to_string(this->iconList.size());
 	IconObject* iconObj = new IconObject(objectName, this->iconList.size());
 	this->iconList.push_back(iconObj);
