@@ -40,3 +40,7 @@ Release
 ipch
 *sdf
 .vs
+
+# Libs
+OPENCV/
+SFML-2.5.1/
