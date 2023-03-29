@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 #include "HelloWorldThread.h"
 #include "IETThread.h"
 #include <thread>
@@ -22,7 +21,15 @@ void testFunctionThread()
 }
 
 int main() {
-	//createHWThreads();
-	std::thread myThread(testFunctionThread);
-	myThread.join();
+	createHWThreads();
+
+	// std::thread myThread(testFunctionThread);
+	// // myThread.join();
+	// myThread.detach();
+	//
+	// std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	// std::cout << "My last execution." << std::endl;
+	//
+	// std::thread* threadPtr = new std::thread(testFunctionThread);
+	// threadPtr->join();
 }

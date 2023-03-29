@@ -3,39 +3,57 @@
 
 MonitorSharedBuffer::MonitorSharedBuffer()
 {
-	this->amount = 0;
-	this->conditionA = new ConditionClass();
+	this->totalAmount = 0;
+	this->guard = new Mutex();
+	this->conditionA = new Condition();
+	
 }
 
 MonitorSharedBuffer::~MonitorSharedBuffer()
 {
+	delete this->guard;
+	//delete this->lock;
 	delete this->conditionA;
 }
 
 void MonitorSharedBuffer::depositAmount(int amount)
 {
-	this->amount += amount;
-	std::cout << "[DEPOSIT] My current amount is: " << this->amount << std::endl;
-	this->reportDeposit();
+	this->tryDeposit(amount);
+	this->reportTransactionDone();
 }
 
 void MonitorSharedBuffer::withdrawAmount(int amount)
 {
-	this->tryWithdraw();
-	this->amount -= amount;
-	std::cout << "[WITHDRAW] My current amount is: " << this->amount << std::endl;
+	this->tryWithdraw(amount);
+	this->reportTransactionDone();
 }
 
-void MonitorSharedBuffer::tryWithdraw()
+void MonitorSharedBuffer::tryWithdraw(int amount)
 {
-	while(this->hasDeposited == false) //guarantees mutual exclusion. see implementation.
+	UniqueLock uniqueLock(*this->guard);
+	while(this->transactionDone == false) //guarantees mutual exclusion. see implementation.
 	{
-		this->conditionA->await();
+		this->conditionA->wait(uniqueLock);
 	}
+
+	this->totalAmount -= amount;
+	std::cout << "[WITHDRAW] My current totalAmount is: " << this->totalAmount << std::endl;
+	uniqueLock.unlock();
 }
 
-void MonitorSharedBuffer::reportDeposit()
+void MonitorSharedBuffer::tryDeposit(int amount)
 {
-	this->hasDeposited = true;
-	this->conditionA->notify();
+	UniqueLock uniqueLock(*this->guard);
+	this->totalAmount += amount;
+	std::cout << "[DEPOSIT] My current totalAmount is: " << this->totalAmount << std::endl;
+	uniqueLock.unlock();
+
+}
+
+void MonitorSharedBuffer::reportTransactionDone()
+{
+	UniqueLock uniqueLock(*this->guard);
+	this->transactionDone = true;
+	this->conditionA->notify_one();
+	uniqueLock.unlock();
 }

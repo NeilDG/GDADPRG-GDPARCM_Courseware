@@ -65,11 +65,11 @@ void RayTraceThread::run()
                 pixels = pixels + RayTraceThread::rayColor(r, world, bounces);
             }
 
-            this->mutexSem->acquire();
+            //this->mutexSem->acquire();
             //ColorUtils::writeColor(this->imageFile, pixels, raySamplesPerPixel);
             //pixelGroup.push_back(pixels);
             this->rtImage->setPixel(i, j, pixels.getX(), pixels.getY(), pixels.getZ(), this->raySamplesPerPixel);
-            this->mutexSem->release();
+            //this->mutexSem->release();
         }
     }
 
