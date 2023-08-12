@@ -54,6 +54,6 @@ void MonitorSharedBuffer::reportTransactionDone()
 {
 	UniqueLock uniqueLock(*this->guard);
 	this->transactionDone = true;
-	this->conditionA->notify_one();
+	this->conditionA->notify_all();
 	uniqueLock.unlock();
 }

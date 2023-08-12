@@ -23,6 +23,7 @@ void runMonitorDemo()
 {
 	MonitorSharedBuffer* buffer = new MonitorSharedBuffer();
 
+	//amount is constant 500
 	int numWithdraws = 4;
 	for(int i = 0; i < numWithdraws; i++)
 	{
