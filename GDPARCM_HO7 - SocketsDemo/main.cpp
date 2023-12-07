@@ -15,7 +15,12 @@
 #if defined(IMGUI_IMPL_OPENGL_ES2)
 #include <GLES2/gl2.h>
 #endif
+#include <string>
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
+
+#include "Debug.h"
+#include "NetworkManager.h"
+#include "UIManager.h"
 
 // [Win32] Our example includes a copy of glfw3.lib pre-compiled with VS2010 to maximize ease of testing and compatibility with old VS compilers.
 // To link with VS2010-era libraries, VS2015+ requires linking with legacy_stdio_definitions.lib, which we do using this pragma.
@@ -107,6 +112,14 @@ int main(int, char**)
     bool show_demo_window = false;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
+    char text[1024 * 16] = "";
+    std::string connectionMsgText = "";
+
+    //initialize classes
+    Debug::initialize();
+    UIManager::initialize();
+    NetworkManager::initialize();
+
     // Main loop
 #ifdef __EMSCRIPTEN__
     // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
@@ -142,9 +155,30 @@ int main(int, char**)
             ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
             ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
 
-
+            static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput | ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine;
+            ImGui::InputTextMultiline("Chatbox", text, IM_ARRAYSIZE(text), ImVec2(-FLT_MIN, ImGui::GetTextLineHeight() * 16), flags);
+            ImGui::Button("Send");
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
             ImGui::End();
+
+            ImGui::Begin("Chat Response");                          // Create a window called "Hello, world!" and append into it.
+            static ImGuiInputTextFlags flags2 = ImGuiInputTextFlags_AllowTabInput | ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine;
+            ImGui::TextWrapped(text);
+            ImGui::End();
+
+            ImGui::Begin("Server-Client Connect");
+            if(ImGui::Button("Start as Server"))
+            {
+                NetworkManager::getInstance()->serverStart();
+            }
+            ImGui::SameLine();
+            ImGui::Button("Connect to Server");
+
+            ImGui::Text(connectionMsgText.c_str());
+            
+            ImGui::End();
+
+            UIManager::getInstance()->drawAllUI();
         }
 
         // Rendering
@@ -163,6 +197,9 @@ int main(int, char**)
 #endif
 
     // Cleanup
+    NetworkManager::destroy();
+    Debug::destroy();
+    UIManager::destroy();
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
