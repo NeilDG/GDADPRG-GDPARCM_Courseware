@@ -37,6 +37,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDPARCM_HO5 - Ray Tracing O
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDPARCM_HO6 - Threaded Ray Tracing One Weekend", "GDPARCM_HO6 - Threaded Ray Tracing One Weekend\GDPARCM_HO6 - Threaded Ray Tracing One Weekend.vcxproj", "{4EC9FDE6-B3E7-4B3B-9628-BDBD96733114}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GDPARCM_HO7 - SocketsDemo", "GDPARCM_HO7 - SocketsDemo\GDPARCM_HO7 - SocketsDemo.vcxproj", "{660FFF80-95F0-4332-9914-055F6C4F7D98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -181,6 +183,14 @@ Global
 		{4EC9FDE6-B3E7-4B3B-9628-BDBD96733114}.Release|x64.Build.0 = Release|x64
 		{4EC9FDE6-B3E7-4B3B-9628-BDBD96733114}.Release|x86.ActiveCfg = Release|Win32
 		{4EC9FDE6-B3E7-4B3B-9628-BDBD96733114}.Release|x86.Build.0 = Release|Win32
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Debug|x64.ActiveCfg = Debug|x64
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Debug|x64.Build.0 = Debug|x64
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Debug|x86.ActiveCfg = Debug|Win32
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Debug|x86.Build.0 = Debug|Win32
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Release|x64.ActiveCfg = Release|x64
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Release|x64.Build.0 = Release|x64
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Release|x86.ActiveCfg = Release|Win32
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
