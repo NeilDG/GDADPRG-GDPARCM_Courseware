@@ -39,10 +39,52 @@ void NetworkManager::serverStart()
 	int iResult = getaddrinfo(nullptr, DEFAULT_PORT, &hints, &result);
 	if (iResult == 0)
 	{
-		Debug::Log("Successfully initialized application as SERVER. \n");
+		SOCKET listenSocket = NULL;
+		listenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+
+		if(listenSocket == INVALID_SOCKET)
+		{
+			Debug::Log("Failed to initialize a socket. \n");
+			WSACleanup();
+		}
+
+		//bind socket
+		iResult = bind(listenSocket, result->ai_addr, static_cast<int>(result->ai_addrlen));
+		freeaddrinfo(result);
+
+		if(iResult == SOCKET_ERROR)
+		{
+			Debug::Log("Failed to initialize a socket. \n");
+			closesocket(listenSocket);
+			WSACleanup();
+		}
+		else
+		{
+			Debug::Log("Successfully bound socket! \n");
+		}
+
+		if(listen(listenSocket, SOMAXCONN) == SOCKET_ERROR)
+		{
+			Debug::Log("Listening to a socket failed. \n");
+			closesocket(listenSocket);
+			WSACleanup();
+		}
+
+		//attempt to accept any incoming client connection. Note that accept is a blocking call!
+		Debug::Log("Looking for incoming connections. \n");
+		SOCKET clientSocket = INVALID_SOCKET;
+		clientSocket = accept(listenSocket, nullptr, nullptr);
+
+		if(clientSocket == INVALID_SOCKET)
+		{
+			Debug::Log("No incoming sockets accepted. \n");
+			closesocket(listenSocket);
+			WSACleanup();
+		}
+
 	}
 	else if (iResult != 0) {
-		Debug::Log("Failed to start as SERVER. Please try again. \n");
+		Debug::Log("Failed to initialize network config. Please try again. \n");
 		WSACleanup();
 	}
 }
