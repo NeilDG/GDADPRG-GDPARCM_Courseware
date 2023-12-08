@@ -43,63 +43,65 @@ void NetworkManager::serverStart()
 
 	// Resolve the local address and port to be used by the server
 	int iResult = getaddrinfo(nullptr, DEFAULT_PORT, &hints, &result);
-	if (iResult == 0)
-	{
-		SOCKET listenSocket = NULL;
-		SOCKET clientSocket = INVALID_SOCKET;
-		listenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-
-		if(listenSocket == INVALID_SOCKET)
-		{
-			Debug::Log("Failed to initialize a socket. \n");
-			WSACleanup();
-		}
-
-		//bind socket
-		iResult = bind(listenSocket, result->ai_addr, static_cast<int>(result->ai_addrlen));
-		freeaddrinfo(result);
-
-		if(iResult == SOCKET_ERROR)
-		{
-			Debug::Log("Failed to initialize a socket. \n");
-			closesocket(listenSocket);
-			WSACleanup();
-		}
-		else
-		{
-			Debug::Log("Successfully bound socket! \n");
-		}
-
-		if(listen(listenSocket, SOMAXCONN) == SOCKET_ERROR)
-		{
-			Debug::Log("Listening to a socket failed. \n");
-			closesocket(listenSocket);
-			WSACleanup();
-		}
-
-		//attempt to accept any incoming client connection. Note that accept is a blocking call!
-		Debug::Log("Looking for incoming connections. \n");
-		
-		clientSocket = accept(listenSocket, nullptr, nullptr);
-		if(clientSocket == INVALID_SOCKET)
-		{
-			Debug::Log("No incoming sockets accepted. \n");
-			closesocket(listenSocket);
-			WSACleanup();
-		}
-
-		//no longer needs a listening socket since only one client is allowed
-		closesocket(listenSocket);
-
-	}
-	else if (iResult != 0) {
+	if (iResult != 0) {
 		Debug::Log("Failed to initialize network config. Please try again. \n");
 		WSACleanup();
+		return;
 	}
+	SOCKET listenSocket = NULL;
+	SOCKET clientSocket = INVALID_SOCKET;
+	listenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
+
+	if(listenSocket == INVALID_SOCKET)
+	{
+		Debug::Log("Failed to initialize a socket. \n");
+		WSACleanup();
+	}
+
+	this->serverState = ServerState::WAITING_CONNECTION;
+	//bind socket
+	iResult = bind(listenSocket, result->ai_addr, static_cast<int>(result->ai_addrlen));
+	freeaddrinfo(result);
+
+	if(iResult == SOCKET_ERROR)
+	{
+		Debug::Log("Failed to initialize a socket. \n");
+		closesocket(listenSocket);
+		WSACleanup();
+	}
+	else
+	{
+		Debug::Log("Successfully bound socket! \n");
+	}
+
+	if(listen(listenSocket, SOMAXCONN) == SOCKET_ERROR)
+	{
+		Debug::Log("Listening to a socket failed. \n");
+		closesocket(listenSocket);
+		WSACleanup();
+	}
+
+	//attempt to accept any incoming client connection. Note that accept is a blocking call!
+	Debug::Log("Looking for incoming connections. \n");
+	
+	clientSocket = accept(listenSocket, nullptr, nullptr);
+	if(clientSocket == INVALID_SOCKET)
+	{
+		Debug::Log("No incoming sockets accepted. \n");
+		closesocket(listenSocket);
+		WSACleanup();
+	}
+
+	//no longer needs a listening socket since only one client is allowed
+	closesocket(listenSocket);
+
+	//Receive messages from client until it either both of them shuts down.
+	this->serverState = ServerState::CLIENTS_CONNECTED;
 }
 
 void NetworkManager::clientStart()
 {
+	this->clientState == ClientState::ATTEMPTING_SERVER_CONNECT;
 	SOCKET connectSocket = INVALID_SOCKET;
 	struct addrinfo* result = nullptr, * ptr = nullptr, hints;
 
@@ -142,6 +144,7 @@ void NetworkManager::clientStart()
 		WSACleanup();
 	}
 
+	//first initial send
 	const char* sendMsg = "Client has successfully connected.";
 	iResult = send(connectSocket, sendMsg, (int)strlen(sendMsg), 0);
 	if (iResult == SOCKET_ERROR) {
@@ -154,6 +157,17 @@ void NetworkManager::clientStart()
 	}
 
 	printf("Bytes Sent: %ld\n", iResult);
+	this->clientState = ClientState::CONNECTED_TO_SERVER;
+}
+
+NetworkManager::ServerState NetworkManager::getServerState() const
+{
+	return this->serverState;
+}
+
+NetworkManager::ClientState NetworkManager::getClientState() const
+{
+	return this->clientState;
 }
 
 NetworkManager::NetworkManager()

@@ -70,7 +70,7 @@ int main(int, char**)
 #endif
 
     // Create window with graphics context
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Distributed Producer-Consumer Application", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(UIManager::WINDOW_WIDTH, UIManager::WINDOW_HEIGHT, "Distributed Producer-Consumer Application", nullptr, nullptr);
     if (window == nullptr)
         return 1;
     glfwMakeContextCurrent(window);
@@ -113,12 +113,11 @@ int main(int, char**)
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     char text[1024 * 16] = "";
-    std::string connectionMsgText = "";
 
     //initialize classes
     Debug::initialize();
-    UIManager::initialize();
     NetworkManager::initialize();
+    UIManager::initialize();
 
     // Main loop
 #ifdef __EMSCRIPTEN__
@@ -166,20 +165,18 @@ int main(int, char**)
             ImGui::TextWrapped(text);
             ImGui::End();
 
-            ImGui::Begin("Server-Client Connect");
-            if(ImGui::Button("Start as Server"))
-            {
-                NetworkManager::getInstance()->serverStart();
-            }
-            ImGui::SameLine();
-            if(ImGui::Button("Connect to Server"))
-            {
-                NetworkManager::getInstance()->clientStart();
-            }
-
-            ImGui::Text(connectionMsgText.c_str());
-            
-            ImGui::End();
+            // ImGui::Begin("Server-Client Connect");
+            // if(ImGui::Button("Start as Server"))
+            // {
+            //     NetworkManager::getInstance()->serverStart();
+            // }
+            // ImGui::SameLine();
+            // if(ImGui::Button("Connect to Server"))
+            // {
+            //     NetworkManager::getInstance()->clientStart();
+            // }
+            //
+            // ImGui::End();
 
             UIManager::getInstance()->drawAllUI();
         }
@@ -200,9 +197,10 @@ int main(int, char**)
 #endif
 
     // Cleanup
+    UIManager::destroy();
     NetworkManager::destroy();
     Debug::destroy();
-    UIManager::destroy();
+
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();

@@ -44,6 +44,9 @@
     <ClCompile Include="NetworkManager.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
+    <ClCompile Include="ServerClientConnectScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imstb_truetype.h">
@@ -93,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="NetworkManager.h">
       <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerClientConnectScreen.h">
+      <Filter>Screens</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

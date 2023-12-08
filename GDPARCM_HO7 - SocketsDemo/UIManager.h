@@ -8,13 +8,8 @@
 
 class UINames {
 public:
-	const String PROFILER_SCREEN = "PROFILER_SCREEN";
-	const String MENU_SCREEN = "MENU_SCREEN";
-	const String INSPECTOR_SCREEN = "INSPECTOR_SCREEN";
-	const String HIERARCHY_SCREEN = "HIERARCHY_SCREEN";
-	const String PLAYBACK_SCREEN = "PLAYBACK_SCREEN";
-	const String ACTION_SCREEN = "ACTION_SCREEN";
 	const String CONSOLE_SCREEN = "CONSOLE_SCREEN";
+	const String CONNECT_SCREEN = "CONNECT_SCREEN";
 };
 
 
@@ -31,8 +26,8 @@ public:
 
 	void drawAllUI();
 
-	static const int WINDOW_WIDTH = 1440;
-	static const int WINDOW_HEIGHT = 900;
+	static const int WINDOW_WIDTH = 1280;
+	static const int WINDOW_HEIGHT = 720;
 
 private:
 	UIManager();

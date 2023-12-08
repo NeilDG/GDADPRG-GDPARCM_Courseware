@@ -3,6 +3,7 @@
 #include "Debug.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
+#include "ServerClientConnectScreen.h"
 
 UIManager* UIManager::sharedInstance = nullptr;
 
@@ -30,12 +31,16 @@ void UIManager::drawAllUI()
 
 UIManager::UIManager()
 {
-     //populate UI table
+	//populate UI table
 	UINames uiNames;
 	ConsoleScreen* consoleScreen = new ConsoleScreen();
 	Debug::assignConsole(consoleScreen);
 	this->uiTable[uiNames.CONSOLE_SCREEN] = consoleScreen;
 	this->uiList.push_back(consoleScreen);
+
+	ServerClientConnectScreen* connectScreen = new ServerClientConnectScreen();
+	this->uiTable[uiNames.CONNECT_SCREEN] = connectScreen;
+	this->uiList.push_back(connectScreen);
 }
 
 UIManager::~UIManager()
