@@ -172,7 +172,10 @@ int main(int, char**)
                 NetworkManager::getInstance()->serverStart();
             }
             ImGui::SameLine();
-            ImGui::Button("Connect to Server");
+            if(ImGui::Button("Connect to Server"))
+            {
+                NetworkManager::getInstance()->clientStart();
+            }
 
             ImGui::Text(connectionMsgText.c_str());
             
