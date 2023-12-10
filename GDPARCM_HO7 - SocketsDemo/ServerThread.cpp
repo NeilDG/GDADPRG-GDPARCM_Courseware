@@ -5,6 +5,8 @@
 #include <ws2tcpip.h>
 
 #include "Debug.h"
+#include "EventBroadcaster.h"
+#include "EventNames.h"
 #include "NetworkManager.h"
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -85,20 +87,23 @@ void ServerThread::serverStart()
 	do {
 		this->iResult = recv(clientSocket, recvbuf, recvbuflen, 0);
 		if (this->iResult > 0) {
-			std::string receivedMsg = std::format("[Server] Bytes received: {} \n", this->iResult);
+			std::shared_ptr<Parameters> params = std::make_shared<Parameters>(EventNames::ON_RECEIVED_MSG);
+			params->encodeString(ParameterKeys::MSG_KEY, recvbuf);
+			params->encodeInt(ParameterKeys::SOURCE_KEY, 1);
+
+			EventBroadcaster::getInstance()->broadcastEventWithParams(EventNames::ON_RECEIVED_MSG, params);
 			printf("[Server] Bytes received: %d\n", this->iResult);
-			Debug::Log(receivedMsg);
 
-			// Echo the buffer back to the sender
-			iSendResult = send(this->clientSocket, recvbuf, this->iResult, 0);
-			if (iSendResult == SOCKET_ERROR) {
-				printf("send failed with error: %d\n", WSAGetLastError());
-				closesocket(this->clientSocket);
-				WSACleanup();
-				return;
-			}
-
-			printf("[Server] Bytes sent: %d\n", iSendResult);
+			// // Echo the buffer back to the sender
+			// iSendResult = send(this->clientSocket, recvbuf, this->iResult, 0);
+			// if (iSendResult == SOCKET_ERROR) {
+			// 	printf("send failed with error: %d\n", WSAGetLastError());
+			// 	closesocket(this->clientSocket);
+			// 	WSACleanup();
+			// 	return;
+			// }
+			//
+			// printf("[Server] Bytes sent: %d\n", iSendResult);
 		}
 		else if (this->iResult == 0)
 			printf("Connection closing...\n");
@@ -109,7 +114,7 @@ void ServerThread::serverStart()
 			return;
 		}
 
-		std::cout << "iResult: " << this->iResult << "\n" << std::endl;
+		// std::cout << "iResult: " << this->iResult << "\n" << std::endl;
 	} while (iResult > 0);
 
 }

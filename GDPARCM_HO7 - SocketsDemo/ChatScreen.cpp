@@ -40,7 +40,15 @@ void ChatScreen::drawUI()
 		if(ImGui::Button("Send"))
 		{
 			//send message
-			NetworkManager::getInstance()->sendMessageAsServer(textToSend);
+			if(NetworkManager::getInstance()->getEntityType() == NetworkManager::SERVER)
+			{
+				NetworkManager::getInstance()->sendMessageAsServer(textToSend);
+			}
+			else
+			{
+				NetworkManager::getInstance()->sendMessageAsClient(textToSend);
+			}
+			
 		}
 	}
 	else

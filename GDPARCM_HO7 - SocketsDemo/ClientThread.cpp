@@ -16,7 +16,6 @@ ClientThread::ClientThread()
 void ClientThread::clientStart()
 {
 	NetworkManager::getInstance()->clientState == NetworkManager::ClientState::ATTEMPTING_SERVER_CONNECT;
-	SOCKET connectSocket = INVALID_SOCKET;
 	struct addrinfo* result = nullptr, * ptr = nullptr, hints;
 
 	ZeroMemory(&hints, sizeof(hints));
@@ -24,14 +23,14 @@ void ClientThread::clientStart()
 	hints.ai_socktype = SOCK_STREAM;
 	hints.ai_protocol = IPPROTO_TCP;
 
-	int iResult = getaddrinfo(DEFAULT_IP_ADDRESS, DEFAULT_PORT, &hints, &result);
+	this->iResult = getaddrinfo(DEFAULT_IP_ADDRESS, DEFAULT_PORT, &hints, &result);
 
 	for (ptr = result; ptr != nullptr; ptr = ptr->ai_next)
 	{
 		// Create a SOCKET for connecting to server
-		connectSocket = socket(ptr->ai_family, ptr->ai_socktype,
+		this->serverSocket = socket(ptr->ai_family, ptr->ai_socktype,
 			ptr->ai_protocol);
-		if (connectSocket == INVALID_SOCKET) {
+		if (this->serverSocket == INVALID_SOCKET) {
 			wchar_t* s = nullptr;
 			std::string errorMsg = std::format("Socket failed with error: {} \n", FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, nullptr, WSAGetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPWSTR)s, sizeof(s), nullptr));
 			printf("socket failed with error: %ld\n", WSAGetLastError());
@@ -41,10 +40,10 @@ void ClientThread::clientStart()
 		}
 
 		// Connect to server.
-		iResult = connect(connectSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
+		iResult = connect(this->serverSocket, ptr->ai_addr, (int)ptr->ai_addrlen);
 		if (iResult == SOCKET_ERROR) {
-			closesocket(connectSocket);
-			connectSocket = INVALID_SOCKET;
+			closesocket(this->serverSocket);
+			this->serverSocket = INVALID_SOCKET;
 			continue;
 		}
 		break;
@@ -52,7 +51,7 @@ void ClientThread::clientStart()
 
 	freeaddrinfo(result);
 
-	if (connectSocket == INVALID_SOCKET)
+	if (this->serverSocket == INVALID_SOCKET)
 	{
 		Debug::Log("Unable to connect to server \n");
 		WSACleanup();
@@ -62,13 +61,13 @@ void ClientThread::clientStart()
 
 	//first initial send
 	const char* sendMsg = "Client has successfully connected.";
-	iResult = send(connectSocket, sendMsg, (int)strlen(sendMsg), 0);
+	iResult = send(this->serverSocket, sendMsg, (int)strlen(sendMsg), 0);
 	if (iResult == SOCKET_ERROR) {
 		std::string errorMsg = std::format("Send failed with error: {} \n", WSAGetLastError());
 		printf("send failed: %d\n", WSAGetLastError());
 
 		Debug::Log(errorMsg);
-		closesocket(connectSocket);
+		closesocket(this->serverSocket);
 		WSACleanup();
 		NetworkManager::getInstance()->clientState = NetworkManager::ClientState::CLIENT_INACTIVE;
 		return;
@@ -91,7 +90,7 @@ void ClientThread::clientStart()
 	// Receive until the peer closes the connection
 	do {
 
-		iResult = recv(connectSocket, recvbuf, recvbuflen, 0);
+		iResult = recv(this->serverSocket, recvbuf, recvbuflen, 0);
 		if (iResult > 0) {
 			std::shared_ptr<Parameters> params = std::make_shared<Parameters>(EventNames::ON_RECEIVED_MSG);
 			params->encodeString(ParameterKeys::MSG_KEY, recvbuf);
@@ -108,9 +107,25 @@ void ClientThread::clientStart()
 	} while (iResult > 0);
 
 	// cleanup
-	closesocket(connectSocket);
+	closesocket(this->serverSocket);
 	WSACleanup();
 	NetworkManager::getInstance()->clientState = NetworkManager::ClientState::CLIENT_INACTIVE;
+}
+
+void ClientThread::sendMessage(std::string msg) const
+{
+	int iSendResult = send(this->serverSocket, msg.c_str(), this->iResult, 0);
+	std::string debugMsg = std::format("Message sent to server: {} \n", msg);
+	std::cout << debugMsg << std::endl;
+
+	if (iSendResult == SOCKET_ERROR) {
+		printf("send failed with error: %d\n", WSAGetLastError());
+		closesocket(this->serverSocket);
+		WSACleanup();
+		return;
+	}
+
+	Debug::Log(debugMsg);
 }
 
 void ClientThread::run()

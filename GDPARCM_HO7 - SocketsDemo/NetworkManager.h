@@ -18,8 +18,8 @@ public:
 	static void initialize();
 	static void destroy();
 
-	void serverStart() const;
-	void clientStart() const;
+	void serverStart();
+	void clientStart();
 
 	enum ServerState
 	{
@@ -37,11 +37,19 @@ public:
 		CLOSED
 	};
 
+	enum EntityType
+	{
+		SERVER,
+		CLIENT
+	};
+
 	ServerState getServerState() const;
 	ClientState getClientState() const;
+	EntityType getEntityType() const;
 
 	void setThreadingEnabled(bool flag);
 	void sendMessageAsServer(std::string msg) const;
+	void sendMessageAsClient(std::string msg) const;
 
 private:
 	NetworkManager();
@@ -53,6 +61,7 @@ private:
 
 	ServerState serverState = ServerState::SERVER_INACTIVE;
 	ClientState clientState = ClientState::CLIENT_INACTIVE;
+	EntityType entityType = EntityType::SERVER;
 	bool threadingEnabled = true;
 
 	std::shared_ptr<ServerThread> serverThread = nullptr;

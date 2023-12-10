@@ -47,8 +47,9 @@ NetworkManager::NetworkManager()
 	}
 }
 
-void NetworkManager::serverStart() const
+void NetworkManager::serverStart()
 {
+	this->entityType = EntityType::SERVER;
 	if(this->threadingEnabled)
 	{
 		this->serverThread->start();
@@ -59,8 +60,9 @@ void NetworkManager::serverStart() const
 	}
 }
 
-void NetworkManager::clientStart() const
+void NetworkManager::clientStart()
 {
+	this->entityType = EntityType::CLIENT;
 	if (this->threadingEnabled)
 	{
 		this->clientThread->start();
@@ -81,6 +83,11 @@ NetworkManager::ClientState NetworkManager::getClientState() const
 	return this->clientState;
 }
 
+NetworkManager::EntityType NetworkManager::getEntityType() const
+{
+	return this->entityType;
+}
+
 void NetworkManager::setThreadingEnabled(bool flag)
 {
 	this->threadingEnabled = flag;
@@ -89,6 +96,11 @@ void NetworkManager::setThreadingEnabled(bool flag)
 void NetworkManager::sendMessageAsServer(std::string msg) const
 {
 	this->serverThread->sendMessage(msg);
+}
+
+void NetworkManager::sendMessageAsClient(std::string msg) const
+{
+	this->clientThread->sendMessage(msg);
 }
 
 
