@@ -31,72 +31,34 @@ void NetworkManager::destroy()
 	delete sharedInstance;
 }
 
-void NetworkManager::serverStart()
+NetworkManager::NetworkManager()
 {
-	struct addrinfo* result = nullptr, * ptr = nullptr, hints;
+	WSADATA wsaData;
 
-	ZeroMemory(&hints, sizeof(hints));
-	hints.ai_family = AF_INET;
-	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_protocol = IPPROTO_TCP;
-	hints.ai_flags = AI_PASSIVE;
+	int result;
 
-	// Resolve the local address and port to be used by the server
-	int iResult = getaddrinfo(nullptr, DEFAULT_PORT, &hints, &result);
-	if (iResult != 0) {
-		Debug::Log("Failed to initialize network config. Please try again. \n");
-		WSACleanup();
-		return;
-	}
-	SOCKET listenSocket = NULL;
-	SOCKET clientSocket = INVALID_SOCKET;
-	listenSocket = socket(result->ai_family, result->ai_socktype, result->ai_protocol);
-
-	if(listenSocket == INVALID_SOCKET)
+	result = WSAStartup(MAKEWORD(2, 2), &wsaData);
+	if (result == 0)
 	{
-		Debug::Log("Failed to initialize a socket. \n");
-		WSACleanup();
-	}
-
-	this->serverState = ServerState::WAITING_CONNECTION;
-	//bind socket
-	iResult = bind(listenSocket, result->ai_addr, static_cast<int>(result->ai_addrlen));
-	freeaddrinfo(result);
-
-	if(iResult == SOCKET_ERROR)
-	{
-		Debug::Log("Failed to initialize a socket. \n");
-		closesocket(listenSocket);
-		WSACleanup();
+		Debug::Log("Successfully initialized winsock \n");
+		this->serverAcceptingThread = std::make_shared<ServerAcceptingThread>();
 	}
 	else
 	{
-		Debug::Log("Successfully bound socket! \n");
+		Debug::Log("Winsock failed. \n");
 	}
+}
 
-	if(listen(listenSocket, SOMAXCONN) == SOCKET_ERROR)
+void NetworkManager::serverStart()
+{
+	if(this->threadingEnabled)
 	{
-		Debug::Log("Listening to a socket failed. \n");
-		closesocket(listenSocket);
-		WSACleanup();
+		this->serverAcceptingThread->start();
 	}
-
-	//attempt to accept any incoming client connection. Note that accept is a blocking call!
-	Debug::Log("Looking for incoming connections. \n");
-	
-	clientSocket = accept(listenSocket, nullptr, nullptr);
-	if(clientSocket == INVALID_SOCKET)
+	else
 	{
-		Debug::Log("No incoming sockets accepted. \n");
-		closesocket(listenSocket);
-		WSACleanup();
+		this->serverAcceptingThread->serverStart();
 	}
-
-	//no longer needs a listening socket since only one client is allowed
-	closesocket(listenSocket);
-
-	//Receive messages from client until it either both of them shuts down.
-	this->serverState = ServerState::CLIENTS_CONNECTED;
 }
 
 void NetworkManager::clientStart()
@@ -170,21 +132,9 @@ NetworkManager::ClientState NetworkManager::getClientState() const
 	return this->clientState;
 }
 
-NetworkManager::NetworkManager()
+void NetworkManager::setThreadingEnabled(bool flag)
 {
-	WSADATA wsaData;
-
-	int result;
-
-	result = WSAStartup(MAKEWORD(2, 2), &wsaData);
-	if (result == 0)
-	{
-		Debug::Log("Successfully initialized winsock \n");
-	}
-	else
-	{
-		Debug::Log("Winsock failed. \n");
-	}
+	this->threadingEnabled = flag;
 }
 
 

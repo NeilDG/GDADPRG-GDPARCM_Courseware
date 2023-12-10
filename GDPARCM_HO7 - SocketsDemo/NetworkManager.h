@@ -1,4 +1,7 @@
 #pragma once
+#include "ServerAcceptingThread.h"
+#include <memory>
+
 class NetworkManager
 {
 public:
@@ -28,6 +31,8 @@ public:
 	ServerState getServerState() const;
 	ClientState getClientState() const;
 
+	void setThreadingEnabled(bool flag);
+
 private:
 	NetworkManager();
 	~NetworkManager() = default;
@@ -38,5 +43,11 @@ private:
 
 	ServerState serverState = ServerState::SERVER_INACTIVE;
 	ClientState clientState = ClientState::CLIENT_INACTIVE;
+	bool threadingEnabled = true;
+
+	std::shared_ptr<ServerAcceptingThread> serverAcceptingThread = nullptr;
+
+	friend class ServerAcceptingThread;
+
 };
 

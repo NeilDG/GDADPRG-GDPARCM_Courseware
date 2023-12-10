@@ -147,6 +147,7 @@
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="ServerAcceptingThread.cpp" />
     <ClCompile Include="ServerClientConnectScreen.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="NetworkManager.h" />
+    <ClInclude Include="ServerAcceptingThread.h" />
     <ClInclude Include="ServerClientConnectScreen.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>
