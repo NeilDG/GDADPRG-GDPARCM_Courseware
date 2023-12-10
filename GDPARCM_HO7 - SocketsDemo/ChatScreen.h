@@ -15,9 +15,6 @@ public:
 		CLIENT
 	};
 
-	const String MSG_KEY = "MSG_KEY";
-	const String SOURCE_KEY = "SOURCE_KEY";
-
 private:
 	ChatScreen();
 	~ChatScreen();

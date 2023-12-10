@@ -3,7 +3,9 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+#include "ChatScreen.h"
 #include "Debug.h"
+#include "EventBroadcaster.h"
 #include "NetworkManager.h"
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -68,11 +70,11 @@ void ClientThread::clientStart()
 		Debug::Log(errorMsg);
 		closesocket(connectSocket);
 		WSACleanup();
-		NetworkManager::getInstance()->clientState == NetworkManager::ClientState::CLIENT_INACTIVE;
+		NetworkManager::getInstance()->clientState = NetworkManager::ClientState::CLIENT_INACTIVE;
 		return;
 	}
 
-	printf("Bytes Sent: %ld\n", iResult);
+	printf("[Client] Bytes Sent: %ld\n", iResult);
 	NetworkManager::getInstance()->clientState = NetworkManager::ClientState::CONNECTED_TO_SERVER;
 
 	// // shutdown the connection since no more data will be sent
@@ -90,8 +92,14 @@ void ClientThread::clientStart()
 	do {
 
 		iResult = recv(connectSocket, recvbuf, recvbuflen, 0);
-		if (iResult > 0)
-			printf("Bytes received: %d\n", iResult);
+		if (iResult > 0) {
+			std::shared_ptr<Parameters> params = std::make_shared<Parameters>(EventNames::ON_RECEIVED_MSG);
+			params->encodeString(ParameterKeys::MSG_KEY, recvbuf);
+			params->encodeInt(ParameterKeys::SOURCE_KEY, 0);
+
+			EventBroadcaster::getInstance()->broadcastEventWithParams(EventNames::ON_RECEIVED_MSG, params);
+			printf("[Client] Bytes received: %d\n", iResult);
+		}
 		else if (iResult == 0)
 			printf("Connection closed\n");
 		else
@@ -102,7 +110,7 @@ void ClientThread::clientStart()
 	// cleanup
 	closesocket(connectSocket);
 	WSACleanup();
-	NetworkManager::getInstance()->clientState == NetworkManager::ClientState::CLIENT_INACTIVE;
+	NetworkManager::getInstance()->clientState = NetworkManager::ClientState::CLIENT_INACTIVE;
 }
 
 void ClientThread::run()

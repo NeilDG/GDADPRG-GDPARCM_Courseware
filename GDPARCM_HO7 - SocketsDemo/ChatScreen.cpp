@@ -11,7 +11,7 @@ void ChatScreen::appendText(String text, Source source)
 		sourceStr = "CLIENT";
 	}
 	std::stringstream buffer;
-	buffer << this->lineCount << " Source: " << sourceStr << " : " << text;
+	buffer << this->lineCount << sourceStr << " : " << text << std::endl;
 
 	this->textLog->appendf(buffer.str().c_str());
 	this->lineCount++;
@@ -62,8 +62,8 @@ void ChatScreen::onTriggeredEvent(std::string eventName, std::shared_ptr<Paramet
 {
 	if(eventName == EventNames::ON_RECEIVED_MSG)
 	{
-		String msgString = parameters->getStringData(ChatScreen::MSG_KEY, "");
-		int sourceKey = parameters->getIntData(ChatScreen::SOURCE_KEY, 0);
+		String msgString = parameters->getStringData(ParameterKeys::MSG_KEY, "");
+		int sourceKey = parameters->getIntData(ParameterKeys::SOURCE_KEY, 0);
 		Source source = Source::SERVER;
 		if(sourceKey == 1)
 		{

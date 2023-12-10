@@ -56,7 +56,7 @@ void Parameters::encodeFloat(const String keyName, float item)
 
 void Parameters::encodeString(const String keyName, String item)
 {
-	this->stringTable[keyName] = keyName;
+	this->stringTable[keyName] = item;
 }
 
 String Parameters::getStringData(const String keyName, String defaultValue)

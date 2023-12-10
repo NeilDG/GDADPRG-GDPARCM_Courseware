@@ -83,11 +83,10 @@ void ServerThread::serverStart()
 	int recvbuflen = DEFAULT_BUFFER_LEN;
 	// Receive until the peer shuts down the connection
 	do {
-
 		this->iResult = recv(clientSocket, recvbuf, recvbuflen, 0);
 		if (this->iResult > 0) {
-			std::string receivedMsg = std::format("Bytes received: {} \n", this->iResult);
-			printf("Bytes received: %d\n", this->iResult);
+			std::string receivedMsg = std::format("[Server] Bytes received: {} \n", this->iResult);
+			printf("[Server] Bytes received: %d\n", this->iResult);
 			Debug::Log(receivedMsg);
 
 			// Echo the buffer back to the sender
@@ -99,7 +98,7 @@ void ServerThread::serverStart()
 				return;
 			}
 
-			printf("Bytes sent: %d\n", iSendResult);
+			printf("[Server] Bytes sent: %d\n", iSendResult);
 		}
 		else if (this->iResult == 0)
 			printf("Connection closing...\n");
@@ -110,33 +109,38 @@ void ServerThread::serverStart()
 			return;
 		}
 
-		if(this->hasPendingMsg)
-		{
-			iSendResult = send(this->clientSocket, this->msgToSend.c_str(), this->iResult, 0);
-			if (iSendResult == SOCKET_ERROR) {
-				printf("send failed with error: %d\n", WSAGetLastError());
-				closesocket(this->clientSocket);
-				WSACleanup();
-				return;
-			}
+		std::cout << "iResult: " << this->iResult << "\n" << std::endl;
+	} while (iResult > 0);
 
-			std::string debugMsg = std::format("Message sent to client: {} \n", this->msgToSend);
-			Debug::Log(debugMsg);
-			this->hasPendingMsg = false;
-			this->msgToSend = "";
-		}
-		else
-		{
-			std::cout << "Has no pending msg. iResult: " << this->iResult << std::endl;
-		}
-
-	} while (true);
 }
 
 void ServerThread::sendMessage(std::string msg)
 {
 	this->hasPendingMsg = true;
 	this->msgToSend = msg;
+	int iSendResult = 0;
+
+	if (this->hasPendingMsg)
+	{
+		iSendResult = send(this->clientSocket, this->msgToSend.c_str(), this->iResult, 0);
+		std::string debugMsg = std::format("Message sent to client: {} \n", this->msgToSend);
+		std::cout << debugMsg << std::endl;
+
+		if (iSendResult == SOCKET_ERROR) {
+			printf("send failed with error: %d\n", WSAGetLastError());
+			closesocket(this->clientSocket);
+			WSACleanup();
+			return;
+		}
+
+		Debug::Log(debugMsg);
+		this->hasPendingMsg = false;
+		this->msgToSend = "";
+	}
+	else
+	{
+		std::cout << "Has no pending msg. iResult: " << this->iResult << std::endl;
+	}
 }
 
 void ServerThread::run()
