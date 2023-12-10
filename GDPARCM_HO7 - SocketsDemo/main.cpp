@@ -19,6 +19,7 @@
 #include <GLFW/glfw3.h> // Will drag system OpenGL headers
 
 #include "Debug.h"
+#include "EventBroadcaster.h"
 #include "NetworkManager.h"
 #include "UIManager.h"
 
@@ -115,6 +116,7 @@ int main(int, char**)
     char text[1024 * 16] = "";
 
     //initialize classes
+    EventBroadcaster::initialize();
     Debug::initialize();
     NetworkManager::initialize();
     UIManager::initialize();
@@ -150,20 +152,20 @@ int main(int, char**)
             static float f = 0.0f;
             static int counter = 0;
 
-            ImGui::Begin("Chat Main window");                          // Create a window called "Hello, world!" and append into it.
-            ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-            ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+            // ImGui::Begin("Chat Main window");                          // Create a window called "Hello, world!" and append into it.
+            // ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+            // ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+            //
+            // static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput | ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine;
+            // ImGui::InputTextMultiline("Chatbox", text, IM_ARRAYSIZE(text), ImVec2(-FLT_MIN, ImGui::GetTextLineHeight() * 16), flags);
+            // ImGui::Button("Send");
+            // ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+            // ImGui::End();
 
-            static ImGuiInputTextFlags flags = ImGuiInputTextFlags_AllowTabInput | ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine;
-            ImGui::InputTextMultiline("Chatbox", text, IM_ARRAYSIZE(text), ImVec2(-FLT_MIN, ImGui::GetTextLineHeight() * 16), flags);
-            ImGui::Button("Send");
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-            ImGui::End();
-
-            ImGui::Begin("Chat Response");                          // Create a window called "Hello, world!" and append into it.
-            static ImGuiInputTextFlags flags2 = ImGuiInputTextFlags_AllowTabInput | ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine;
-            ImGui::TextWrapped(text);
-            ImGui::End();
+            // ImGui::Begin("Chat Response");                          // Create a window called "Hello, world!" and append into it.
+            // static ImGuiInputTextFlags flags2 = ImGuiInputTextFlags_AllowTabInput | ImGuiInputTextFlags_EnterReturnsTrue | ImGuiInputTextFlags_CtrlEnterForNewLine;
+            // ImGui::TextWrapped(text);
+            // ImGui::End();
 
             // ImGui::Begin("Server-Client Connect");
             // if(ImGui::Button("Start as Server"))
@@ -200,6 +202,7 @@ int main(int, char**)
     UIManager::destroy();
     NetworkManager::destroy();
     Debug::destroy();
+    EventBroadcaster::destroy();
 
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();

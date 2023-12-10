@@ -134,8 +134,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AUIScreen.cpp" />
+    <ClCompile Include="ChatScreen.cpp" />
+    <ClCompile Include="ClientThread.cpp" />
     <ClCompile Include="ConsoleScreen.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="EventBroadcaster.cpp" />
     <ClCompile Include="IETSemaphore.cpp" />
     <ClCompile Include="IETThread.cpp" />
     <ClCompile Include="imgui.cpp" />
@@ -147,13 +150,18 @@
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NetworkManager.cpp" />
+    <ClCompile Include="ServerThread.cpp" />
     <ClCompile Include="ServerClientConnectScreen.cpp" />
     <ClCompile Include="UIManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AUIScreen.h" />
+    <ClInclude Include="ChatScreen.h" />
+    <ClInclude Include="ClientThread.h" />
     <ClInclude Include="ConsoleScreen.h" />
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="EventBroadcaster.h" />
+    <ClInclude Include="EventNames.h" />
     <ClInclude Include="IETSemaphore.h" />
     <ClInclude Include="IETThread.h" />
     <ClInclude Include="imconfig.h" />
@@ -166,6 +174,7 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="NetworkManager.h" />
+    <ClInclude Include="ServerThread.h" />
     <ClInclude Include="ServerClientConnectScreen.h" />
     <ClInclude Include="UIManager.h" />
   </ItemGroup>

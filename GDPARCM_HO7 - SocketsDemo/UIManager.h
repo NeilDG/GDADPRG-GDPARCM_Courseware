@@ -10,6 +10,7 @@ class UINames {
 public:
 	const String CONSOLE_SCREEN = "CONSOLE_SCREEN";
 	const String CONNECT_SCREEN = "CONNECT_SCREEN";
+	const String CHAT_SCREEN = "CHAT_SCREEN";
 };
 
 
