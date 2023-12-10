@@ -1,16 +1,25 @@
 #pragma once
-#include "ServerAcceptingThread.h"
+#include "ServerThread.h"
+#include "ClientThread.h"
 #include <memory>
+
+#define DEFAULT_IP_ADDRESS "192.168.1.134"
+#define DEFAULT_PORT "8088"
+#define DEFAULT_BUFFER_LEN 512
 
 class NetworkManager
 {
 public:
+	// static constexpr std::string DEFAULT_IP_ADDRESS = "192.168.1.134";
+	// static constexpr std::string DEFAULT_PORT = "8088";
+	// static constexpr int DEFAULT_BUFFER_LEN = 512;
+
 	static NetworkManager* getInstance();
 	static void initialize();
 	static void destroy();
 
-	void serverStart();
-	void clientStart();
+	void serverStart() const;
+	void clientStart() const;
 
 	enum ServerState
 	{
@@ -32,6 +41,7 @@ public:
 	ClientState getClientState() const;
 
 	void setThreadingEnabled(bool flag);
+	void sendMessageAsServer(std::string msg) const;
 
 private:
 	NetworkManager();
@@ -45,9 +55,11 @@ private:
 	ClientState clientState = ClientState::CLIENT_INACTIVE;
 	bool threadingEnabled = true;
 
-	std::shared_ptr<ServerAcceptingThread> serverAcceptingThread = nullptr;
+	std::shared_ptr<ServerThread> serverThread = nullptr;
+	std::shared_ptr<ClientThread> clientThread = nullptr;
 
-	friend class ServerAcceptingThread;
+	friend class ServerThread;
+	friend class ClientThread;
 
 };
 

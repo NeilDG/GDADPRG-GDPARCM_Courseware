@@ -47,8 +47,17 @@
     <ClCompile Include="ServerClientConnectScreen.cpp">
       <Filter>Screens</Filter>
     </ClCompile>
-    <ClCompile Include="ServerAcceptingThread.cpp">
+    <ClCompile Include="ServerThread.cpp">
       <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientThread.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="EventBroadcaster.cpp">
+      <Filter>Broadcasting</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,8 +112,20 @@
     <ClInclude Include="ServerClientConnectScreen.h">
       <Filter>Screens</Filter>
     </ClInclude>
-    <ClInclude Include="ServerAcceptingThread.h">
+    <ClInclude Include="ServerThread.h">
       <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientThread.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="EventBroadcaster.h">
+      <Filter>Broadcasting</Filter>
+    </ClInclude>
+    <ClInclude Include="EventNames.h">
+      <Filter>Broadcasting</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +140,9 @@
     </Filter>
     <Filter Include="Networking">
       <UniqueIdentifier>{1c86474c-60a6-4ff3-b23c-3e7a1b9f7df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Broadcasting">
+      <UniqueIdentifier>{25fda733-a7d6-470e-9837-219ab684348d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
