@@ -10,7 +10,8 @@ IETThread::~IETThread()
 
 void IETThread::start()
 {
-	std::thread(&IETThread::run, this).detach(); //detach thread for independent execution. without this, join() function must be called.
+	//detach thread for independent execution. without this, join() function must be called.
+	std::thread(&IETThread::run, this).detach();
 }
 
 void IETThread::sleep(int ms)
