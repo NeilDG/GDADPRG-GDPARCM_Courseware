@@ -3,7 +3,7 @@
 #include "ClientThread.h"
 #include <memory>
 
-#define DEFAULT_IP_ADDRESS "192.168.1.134"
+#define DEFAULT_IP_ADDRESS "192.168.0.113" //TODO: Put your IP address here
 #define DEFAULT_PORT "8088"
 #define DEFAULT_BUFFER_LEN 512
 
