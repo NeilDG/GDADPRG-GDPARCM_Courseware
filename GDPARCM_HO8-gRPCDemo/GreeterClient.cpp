@@ -1,5 +1,4 @@
 #include "GreeterClient.h"
-
 #include <grpcpp/create_channel.h>
 
 GreeterClient::GreeterClient(std::shared_ptr<grpc::ChannelInterface> channel)
@@ -15,6 +14,10 @@ std::string GreeterClient::SayHello(const std::string& user)
     request.set_name(user);
     HelloReply reply;
     grpc::ClientContext context;
+
+    std::chrono::time_point deadline = std::chrono::system_clock::now() +
+        std::chrono::milliseconds(2000);
+    context.set_deadline(deadline);
 
     // Here we can use the stub's newly available method we just added.
     grpc::Status status = stub_->SayHello(&context, request, &reply);
