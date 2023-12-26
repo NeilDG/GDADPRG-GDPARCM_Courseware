@@ -24,11 +24,20 @@ void runMonitorDemo()
 {
 	MonitorSharedBuffer* buffer = new MonitorSharedBuffer();
 
-	MonitorTransactionThread* withdrawThread = new MonitorTransactionThread(0, buffer, false);
-	MonitorTransactionThread* depositThread = new MonitorTransactionThread(1, buffer, true);
+	//amount is constant 500
+	int numWithdraws = 4;
+	for(int i = 0; i < numWithdraws; i++)
+	{
+		MonitorTransactionThread* withdrawThread = new MonitorTransactionThread(0, buffer, false);
+		withdrawThread->start();
+	}
 
-	depositThread->start();
-	withdrawThread->start();
+	int numDeposits = 5;
+	for(int i = 0; i < numDeposits; i++)
+	{
+		MonitorTransactionThread* depositThread = new MonitorTransactionThread(1, buffer, true);
+		depositThread->start();
+	}
 }
 
 void runSampleAlgo_Shopaholic()
@@ -59,8 +68,8 @@ int main() {
 	{
 		std::cout << "Performing run #" << (i + 1) << std::endl;
 
-		runSemaphoreDemo();
-		//runMonitorDemo();
+		//runSemaphoreDemo();
+		runMonitorDemo();
 		IETThread::sleep(2500);
 
 		std::cout << std::endl;

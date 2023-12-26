@@ -13,20 +13,19 @@ public:
 	void depositAmount(int amount);
 	void withdrawAmount(int amount);
 private:
-	/*typedef std::condition_variable Condition;
+	typedef std::condition_variable Condition;
 	typedef std::mutex Mutex;
 	typedef std::unique_lock<std::mutex> UniqueLock;
-	
-	Condition conditionA;
-	Mutex guard;
-	UniqueLock* lock;*/
 
-	ConditionClass* conditionA;
+	Condition* conditionA;
+	Mutex* guard;
 	
-	int amount = 0;
-	bool hasDeposited = false;
+	int totalAmount = 0;
+	bool transactionDone = false;
 	
-	void tryWithdraw();
-	void reportDeposit();
+	void tryWithdraw(int amount);
+	void tryDeposit(int amount);
+	void reportTransactionDone();
+	
 };
 

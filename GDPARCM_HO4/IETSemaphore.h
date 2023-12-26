@@ -17,7 +17,9 @@ public:
 
 private:
 	const static int GLOBAL_MAX_PERMIT = 50;
-	typedef std::counting_semaphore<GLOBAL_MAX_PERMIT> Semaphore; //C++ 20 requires permits to be known during compile-time. Global max here is 50.
+	//C++ 20 requires permits to be known during compile-time.
+	//Global max here is 50.
+	typedef std::counting_semaphore<GLOBAL_MAX_PERMIT> Semaphore;
 	Semaphore* semaphore;
 };
 

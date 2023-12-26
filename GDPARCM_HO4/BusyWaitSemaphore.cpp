@@ -30,6 +30,7 @@ void BusyWaitSemaphore::acquire()
 	{
 		this->guard->unlock();
 		this->wait();
+		this->permits = this->permits - 1;
 	}
 }
 
