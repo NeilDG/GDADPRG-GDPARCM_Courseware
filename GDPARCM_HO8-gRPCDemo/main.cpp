@@ -1,8 +1,6 @@
 // GDPARCM_HO8 - gRPC Demo.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <iostream>
-
 #include "GreeterServer.h"
 #include "GreeterClient.h"
 
