@@ -2,8 +2,8 @@
 
 Lightswitch::Lightswitch()
 {
-	this->mutex = new BusyWaitSemaphore(1, 1);
-	this->roomEmpty = new BusyWaitSemaphore(1, 1);
+	this->mutex = new IETSemaphore(1);
+	this->roomEmpty = new IETSemaphore(1);
 }
 
 Lightswitch::~Lightswitch()

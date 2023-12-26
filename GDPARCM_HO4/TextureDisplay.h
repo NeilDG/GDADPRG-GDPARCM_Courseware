@@ -2,6 +2,7 @@
 #include "AGameObject.h"
 #include "IExecutionEvent.h"
 #include <mutex>
+#include <semaphore>
 class IconObject;
 /// <summary>
 /// Class that deals with displaying of streamed textures

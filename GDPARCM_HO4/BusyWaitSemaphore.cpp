@@ -20,10 +20,10 @@ BusyWaitSemaphore::~BusyWaitSemaphore()
 
 void BusyWaitSemaphore::acquire()
 {
-	this->guard->lock();
+	this->guard->lock(); //ensures atomicity
 	if(this->permits > 0)
 	{
-		this->permits = this->permits - 1;
+		this->permits = this->permits - 1; 
 		this->guard->unlock();
 	}
 	else

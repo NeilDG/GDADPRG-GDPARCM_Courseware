@@ -3,7 +3,7 @@
 ConditionClass::ConditionClass()
 {
 	this->mutex = new Mutex();
-	this->lock = new UniqueLock(*this->mutex);
+	this->lock = new UniqueLock(*this->mutex); 
 	this->A = new Condition();
 }
 
