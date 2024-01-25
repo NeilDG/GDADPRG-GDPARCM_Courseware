@@ -1,5 +1,7 @@
 #include "StreamAssetLoader.h"
 #include <iostream>
+#include <random>
+
 #include "TextureManager.h"
 #include "StringUtils.h"
 #include "IExecutionEvent.h"
@@ -19,7 +21,10 @@ void StreamAssetLoader::run()
 {
 	std::cout << "Running stream asset loader " << std::endl;
 	//simulate loading of very large file
-	IETThread::sleep(1000);
+	std::random_device seeder;
+	std::mt19937 engine(seeder());
+	std::uniform_int_distribution<int> dist(1000, 4000);
+	IETThread::sleep(dist(engine));
 
 	std::vector<String> tokens = StringUtils::split(path, '/');
 	String assetName = StringUtils::split(tokens[tokens.size() - 1], '.')[0];
