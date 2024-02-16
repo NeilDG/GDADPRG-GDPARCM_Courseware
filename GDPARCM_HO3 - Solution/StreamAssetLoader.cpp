@@ -8,7 +8,7 @@
 StreamAssetLoader::StreamAssetLoader(String path, IExecutionEvent* executionEvent)
 {
 	this->path = path;
-	//this->execEvent = executionEvent;
+	this->execEvent = executionEvent;
 }
 
 StreamAssetLoader::~StreamAssetLoader()
