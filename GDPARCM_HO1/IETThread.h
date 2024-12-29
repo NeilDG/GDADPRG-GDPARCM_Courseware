@@ -9,8 +9,8 @@
 class IETThread
 {
 public:
-	IETThread();
-	~IETThread();
+	IETThread() = default;
+	~IETThread() = default;
 
 	void start(); //schedules thread execution
 	static void sleep(int ms);
